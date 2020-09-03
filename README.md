@@ -3,7 +3,7 @@
 
 _SYSWORK20R_: SISTEMA DE GESTION EMPRESARIAL EN DESARROLLO. 
 
-## Construido con 🛠️
+## Development libraries 🛠️
 
 * [Boostrap](https://getbootstrap.com/) - Framework CSS Utilizado
 * [ReactJS](https://es.reactjs.org/) - Libreria para desarrollo FrontEnd
@@ -16,8 +16,6 @@ _SYSWORK20R_: SISTEMA DE GESTION EMPRESARIAL EN DESARROLLO.
 * [Puppeteer](https://developers.google.com/web/tools/puppeteer) - Libreria de NodeJS utilizado para renderizar los reportes
 * [MomentJS](https://momentjs.com/) - Libreria de JavaScript con metodos utiles para trabajar con fechas y tiempos
 
-## Autores ✒️
+## Developed by ✒️
 
 * Ing. Alejandro G. Sanchez(Ingeniero Electronico UNI, con mas de 12 años de experiencia)
-
-
