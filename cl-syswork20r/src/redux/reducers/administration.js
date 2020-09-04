@@ -3,7 +3,7 @@ import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON} from '../
 const initialState = {
    degrees: [],
    persons: [],
-   person: null
+   person_found: null
 }
 
 export default function (state = initialState, action){
@@ -23,7 +23,7 @@ export default function (state = initialState, action){
         case GET_PERSON_BY_IDPERSON:
             return{
                 ...state,
-                person: action.payload.person
+                person_found: action.payload.person
             }
         
         default:

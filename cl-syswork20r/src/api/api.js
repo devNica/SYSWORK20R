@@ -21,6 +21,8 @@ export default {
             axios.post('/api/administration/create_person_record', {data}).then(res=> res.data),
         get_person: data=>
             axios.post('/api/administration/get_person',{data}).then(res => res.data),
+        edit_person_record: data=>
+            axios.post('/api/administration/edit_person_record',{data}).then(res => res.data),
     },
    
     notificacion: {

@@ -57,3 +57,12 @@ export const fn_create_person_record = data => dispatch =>{
     })
     .catch(error => console.log(error))
 }
+
+export const fn_edit_person_record = (data) => dispatch =>{
+
+    api.administration.edit_person_record(data)
+    .then(response =>{
+       console.log(response)
+    })
+    .catch(error => console.log(error))
+}
