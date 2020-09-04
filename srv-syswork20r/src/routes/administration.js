@@ -28,5 +28,12 @@ router.post('/administration/get_person', (req, res)=>{
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
 
+router.post('/administration/edit_person_record', (req, res)=>{
+    let data=req.body.data;
+    administration.edit_person_record(data).then(result=>{
+        res.status(200).json({flag: true, msg: 'The record was edited successfully'})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+
+})
 
 module.exports = router;

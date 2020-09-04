@@ -1,27 +1,53 @@
 import React, {Fragment} from 'react';
 import {useForm} from 'react-hook-form'
 import SaveIcon from '@material-ui/icons/Save';
+import {useHistory} from 'react-router-dom'
 import './AddPersonForm.css'
 import {connect} from 'react-redux'
+import { useState, useEffect } from 'react';
+import {fn_edit_person_record} from '../../redux/actions/administration';
 
 const mapStateToProps = state =>({
     degrees_fr: state.administration.degrees,
+    person_fr: state.administration.person_found
 })
 
 const EditPersonForm = (props) =>{
 
     const {register, errors, handleSubmit} = useForm();
-    const {degrees_fr} = props;
+    const [selectedOPtion, setOption] = useState('');
+    const [degreeSelected, setDegree] = useState(0);
+    const {degrees_fr, person_fr, fn_edit_person_record, history} = props;
 
-    const onsubmit = (data, e) =>{
-        // if(!data.customer) data.staff = "1";
-        // else data.staff="0";
-        // fn_create_person_record(data)
-        // e.target.reset();
+    useEffect(()=>{
+        let option = person_fr !== null ? person_fr[0].is_customer ? "customer" : "staff" : null
+        let degree = person_fr !== null ? person_fr[0].iddegree : 0
+        setOption(option)
+        setDegree(degree)
+        
+    },[person_fr])
+
+    const onValueChange=(e) =>{
+        setOption(e.target.value)
     }
 
-    const degreeList = degrees_fr.map((degree, i)=>(
-        <option key={i} value={degree.iddegree}>{degree.degree}</option>
+    const handleChange=(e)=>{
+        setDegree(e.target.value)
+    }
+
+    const onsubmit = (data, e) =>{
+
+        data.degree = parseInt(data.degree)
+        data.is_customer = data.type_person === 'customer' ? 1 : 0
+        data.is_staff = data.type_person === 'staff' ? 1 : 0
+        data.idperson =  person_fr[0].idperson
+        fn_edit_person_record(data);
+        //e.target.reset();
+        history.push('/administration/viewpersonsrecords')
+    }
+
+    const degreeList = degrees_fr.map((e, i)=>(
+        <option key={i} value={e.iddegree} >{e.degree}</option>
     ))
 
 
@@ -37,8 +63,8 @@ const EditPersonForm = (props) =>{
                                 name="dni"
                                 id="dni" 
                                 type="text" 
-                                className="form-control" 
-                                placeholder="insert the person's ID"
+                                className="form-control"
+                                defaultValue={person_fr !== null ? person_fr[0].dni : null} 
                                 ref={
                                     register({
                                         required: {value: true, message: 'the ID of the person is required'}
@@ -56,7 +82,7 @@ const EditPersonForm = (props) =>{
                                 name="firstname"
                                 type="text" 
                                 className="form-control" 
-                                placeholder="Insert the person's firts name"
+                                defaultValue={person_fr !== null ? person_fr[0].first_name : null}
                                 ref={
                                     register({
                                         required: {value: true, message: 'the firstname of the person is required'}
@@ -74,7 +100,7 @@ const EditPersonForm = (props) =>{
                                 name="lastname"
                                 type="text" 
                                 className="form-control" 
-                                placeholder="Insert the person's last name"
+                                defaultValue={person_fr !== null ? person_fr[0].last_name : null}
                                 ref={
                                     register({
                                         required: {value: true, message: 'the lastname of the person is required'}
@@ -92,7 +118,7 @@ const EditPersonForm = (props) =>{
                                 name="address"
                                 type="text" 
                                 className="form-control" 
-                                placeholder="Insert the person's Address"
+                                defaultValue={person_fr !== null ? person_fr[0].address : null}
                                 ref={
                                     register({
                                         required: {value: true, message: 'the address of the person is required'}
@@ -112,7 +138,7 @@ const EditPersonForm = (props) =>{
                                         name="phone" 
                                         type="text" 
                                         className="form-control" 
-                                        placeholder="Insert the person´s phone number"
+                                        defaultValue={person_fr !== null ? person_fr[0].phone : null}
                                         ref={
                                             register({
                                                 required: {value: true, message: 'the phone of the person is required'}
@@ -132,13 +158,14 @@ const EditPersonForm = (props) =>{
                                         name="degree" 
                                         id="degree" 
                                         className="form-control"
+                                        value={degreeSelected}
+                                        onChange={handleChange}
                                         ref={
                                             register({
                                                 required: 'Please select one of the options'
                                             })
                                         }
                                     >
-                                        <option value="0">Select an option</option>
                                     {degreeList}
                                     </select>
                                     <span className="text-danger text-small d-block my-2">
@@ -151,9 +178,11 @@ const EditPersonForm = (props) =>{
                             <input 
                                 className="form-check-input" 
                                 type="radio" 
-                                name="customer" 
-                                id="customer" 
-                                value="1"
+                                name="type_person" 
+                                defaultValue="customer"
+                                
+                                checked={selectedOPtion==="customer"}
+                                onChange={onValueChange}
                                 ref={
                                     register({
                                         required: {value: true}
@@ -166,9 +195,11 @@ const EditPersonForm = (props) =>{
                             <input 
                                 className="form-check-input" 
                                 type="radio" 
-                                name="customer" 
-                                id="staff" 
-                                value="0"
+                                name="type_person" 
+                                defaultValue="staff"
+                                
+                                checked={selectedOPtion==="staff"}
+                                onChange={onValueChange}
                                 ref={
                                     register({
                                         required: {value: true}
@@ -188,4 +219,4 @@ const EditPersonForm = (props) =>{
 }
 
 
-export default connect(mapStateToProps,{})(EditPersonForm);
+export default connect(mapStateToProps,{fn_edit_person_record})(EditPersonForm);

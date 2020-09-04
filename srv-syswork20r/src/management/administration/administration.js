@@ -28,7 +28,11 @@ const administrationModelController = {
 
     create_person_record: (data)=>{
         return cnc(mysql, configuration, person.create_person_record(data))
-    }
+    },
+
+    edit_person_record: (data)=>{
+        return cnc(mysql, configuration, person.edit_person_record(data))
+    },
    
 }
 

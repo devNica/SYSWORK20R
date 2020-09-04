@@ -37,6 +37,7 @@ const queryAdministrationModel = {
             P.address,
             P.phone,
             D.degree,
+            D.iddegree,
             IF(P.is_customer = 1, 'CUSTOMER', 'STAFF') AS type,
             IF(P.is_active = 1, "ACTIVE", "INACTIVE") AS state,
             P.is_active,
@@ -75,8 +76,20 @@ const queryAdministrationModel = {
                 '${data.staff}')`
         },
 
-        edit_person_record: ()=>{
-            return ``
+        edit_person_record: (data)=>{
+            let query= `UPDATE 
+            person SET
+            dni = '${data.dni}',
+            first_name = '${data.firstname}', 
+            last_name = '${data.lastname}',
+            address = '${data.address}',
+            phone = '${data.phone}',
+            fk_degree = ${data.degree},
+            is_customer = ${data.is_customer},
+            is_staff = ${data.is_staff}
+            WHERE person.idperson = ${data.idperson}`
+            console.log(query)
+            return query
         }
     }
 }

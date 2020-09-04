@@ -46,7 +46,7 @@ const EditPerson = (props) =>{
             </nav>
 
             <div id="content">
-                {permission === '' ? null : permission === 'edit_person_record' ? <EditPersonForm/>: <Denied/>}
+                {permission === '' ? null : permission === 'edit_person_record' ? <EditPersonForm history={props.history}/>: <Denied/>}
             </div>
         </Fragment>
     )
