@@ -3,11 +3,18 @@
     background: #4c359e linear-gradient(180deg, #434cca, #4c359e) repeat-x;
 }
 
+.form-title-add-employee{
+    background: #355f9e linear-gradient(180deg, #3840a8, #355f9e) repeat-x;
+}
 
 .color-button-edit {
     /* background: #416ce0 linear-gradient(180deg, #3b76c4, #416ce0) repeat-x; */
     background: #362d86 linear-gradient(270deg, #483797, #362d86) repeat-x;
     color: rgba(231, 231, 240, 0.952);
+}
+
+.color-button-modal{
+    background: #355f9e linear-gradient(180deg, #3840a8, #355f9e) repeat-x;
 }
 
 

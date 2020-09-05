@@ -57,9 +57,9 @@ const AdminPanel = (props) => {
                 <AssignmentIndIcon  style={{ color: "#5094de"}} fontSize="small"/> Staff
                 </button>
                 <div className="dropdown-menu" aria-labelledby="staff-module-dropdown">
-                <button className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_employee" onClick={handleOnClick}> 
+                <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_employee" to='/administration/addemployee'> 
                     <PersonAddIcon  style={{ color: "#5094de"}} fontSize="small"/> Add Employee
-                </button>
+                </Link>
                 
                 <button className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_employee" onClick={handleOnClick}>
                     <EditIcon  style={{ color: "#5094de"}} fontSize="small"/> Edit Employee
