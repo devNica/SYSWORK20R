@@ -22,6 +22,7 @@ router.get('/administration/view_persons_records', (req, res)=>{
 })
 
 router.post('/administration/get_person', (req, res)=>{
+    console.log('estoy solicitabdo esta ruta')
     let idperson = req.body.data.id
     administration.get_person_by_idperson(idperson).then(result=>{
         res.status(200).json({flag: true, person: result.rows})

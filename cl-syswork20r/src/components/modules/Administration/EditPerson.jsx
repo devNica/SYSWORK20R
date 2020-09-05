@@ -17,12 +17,12 @@ const EditPerson = (props) =>{
     
     const [permission, setPermission] = useState('')
     const {user_fr, fn_get_person_by_idperson, fn_list_degrees} = props
-    
+
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'edit_person_record')
         setPermission(permission)
         fn_list_degrees()
-        fn_get_person_by_idperson(props.match.params);
+        fn_get_person_by_idperson(props.match.params)
 
     },[user_fr, fn_get_person_by_idperson, fn_list_degrees])
 

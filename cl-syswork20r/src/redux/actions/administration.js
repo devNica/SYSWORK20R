@@ -36,7 +36,7 @@ export const fn_list_persons_records = () => dispatch => {
 }
 
 export const fn_get_person_by_idperson = idperson => dispatch =>{
-    console.log(idperson)
+    console.log('este es el id que ire a buscar', idperson)
     api.administration.get_person(idperson)
     .then(response=>{
         console.log(response)
