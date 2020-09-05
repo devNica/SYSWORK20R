@@ -86,9 +86,9 @@ const queryAdministrationModel = {
             phone = '${data.phone}',
             fk_degree = ${data.degree},
             is_customer = ${data.is_customer},
-            is_staff = ${data.is_staff}
+            is_staff = ${data.is_staff},
+            is_active = ${data.active}
             WHERE person.idperson = ${data.idperson}`
-            console.log(query)
             return query
         }
     }

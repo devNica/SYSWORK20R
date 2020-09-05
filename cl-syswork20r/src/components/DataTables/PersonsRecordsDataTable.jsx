@@ -5,9 +5,8 @@ import {connect} from 'react-redux';
 import {persons_model} from '../../models/persons'
 
 const mapStateToProps = state =>({
-    persons_fr: state.administration.persons
+    persons_fr: state.administration.persons,
 })
-
 
 const administrador_opciones = (data)=>{
 
@@ -26,8 +25,6 @@ const administrador_opciones = (data)=>{
     return options;
     
 }
-
-
 
 const PersonsRecordsDataTable = (props) =>{
 
