@@ -1,4 +1,4 @@
-import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON} from './types';
+import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON, GET_JOBS_LIST} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -18,13 +18,10 @@ export const fn_list_degrees = () => dispatch =>{
     .catch(error => console.log(error));
 }
 
-export const fn_list_persons_records = () => dispatch => {
-    api.administration.view_persons_records()
+export const fn_list_persons_records = (data) => dispatch => {
+    api.administration.view_persons_records(data)
     .then(response =>{
-
         let info = models.persons(response.persons)
-
-
         dispatch({
             type: GET_PERSONS_RECORDS,
             payload: {
@@ -63,6 +60,21 @@ export const fn_edit_person_record = (data) => dispatch =>{
     api.administration.edit_person_record(data)
     .then(response =>{
        console.log(response)
+    })
+    .catch(error => console.log(error))
+}
+
+export const fn_get_jobs_list = data => dispatch => {
+    api.administration.get_job_list(data)
+    .then(response => {
+        let info = models.positions(response.positions)
+        dispatch({
+            type: GET_JOBS_LIST,
+            payload:{
+                positions: info
+            }
+           
+        })
     })
     .catch(error => console.log(error))
 }

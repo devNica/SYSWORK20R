@@ -15,8 +15,9 @@ router.post('/administration/create_person_record', (req, res)=>{
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
 
-router.get('/administration/view_persons_records', (req, res)=>{
-    administration.list_persons_records().then(result=>{
+router.post('/administration/view_persons_records', (req, res)=>{
+    let filter = req.body.data
+    administration.list_persons_records(filter).then(result=>{
         res.status(200).json({flag: true, persons: result.rows})
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
@@ -35,6 +36,13 @@ router.post('/administration/edit_person_record', (req, res)=>{
         res.status(200).json({flag: true, msg: 'The record was edited successfully'})
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 
+})
+
+router.post('/administration/jobs_list', (req, res)=>{
+    let filter = req.body.data;
+    administration.get_jobs_list(filter).then(result=>{
+        res.status(200).json({flag: true, positions: result.rows})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
 
 module.exports = router;
