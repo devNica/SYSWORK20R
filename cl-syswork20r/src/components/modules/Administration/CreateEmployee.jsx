@@ -4,20 +4,27 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
 import AddEmployeeForm from '../../Forms/AddEmployeeForm';
+import {fn_list_persons_records, fn_get_jobs_list} from '../../../redux/actions/administration'
+import {fn_get_list_currencies} from '../../../redux/actions/accounting';
 
 const mapStateToProps = state => ({
     user_fr: state.auth.user,
 })
 
-const CreateEmployee = ({user_fr}) =>{
-    
+const CreateEmployee = (props) =>{
+
+    const {user_fr, fn_list_persons_records, fn_get_jobs_list, fn_get_list_currencies} = props;
     const [permission, setPermission] = useState('')
     
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'create_employee_record')
         setPermission(permission)
 
-    },[user_fr])
+        fn_list_persons_records({filter: `P.is_active = 1 AND P.is_staff = 1`})
+        fn_get_jobs_list({filter: 1})
+        fn_get_list_currencies({filter: 1})
+
+    },[user_fr, fn_list_persons_records, fn_get_list_currencies])
 
     const linkOptions = (
         <Fragment>
@@ -53,4 +60,4 @@ const CreateEmployee = ({user_fr}) =>{
 }
 
 
-export default connect(mapStateToProps,{})(CreateEmployee);
+export default connect(mapStateToProps,{fn_list_persons_records, fn_get_jobs_list, fn_get_list_currencies})(CreateEmployee);

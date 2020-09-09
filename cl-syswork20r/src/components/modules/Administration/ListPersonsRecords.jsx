@@ -18,7 +18,7 @@ const ListPersonsRecords = ({user_fr, fn_list_persons_records})=> {
         let permission = user_fr.permissions.find(element => element === 'view_persons_records')
         setPermission(permission)
 
-        fn_list_persons_records()
+        fn_list_persons_records({filter:1})
 
     },[user_fr, fn_list_persons_records])
 

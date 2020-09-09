@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {Link} from 'react-router-dom';
 import {MDBDataTable} from 'mdbreact';
 import {connect} from 'react-redux';
-import {persons_model} from '../../models/persons'
+import {positions_model} from '../../models/positions'
 
 const mapStateToProps = state =>({
-    persons_fr: state.administration.persons,
+    positions_fr: state.administration.positions,
 })
 
 const administrador_opciones = (data)=>{
@@ -15,7 +15,7 @@ const administrador_opciones = (data)=>{
             <Link 
                 className="btn btn-sm btn-dark color-button-edit" 
                 //value={tasks.data.rows[i].idregin} 
-                to={`/administration/editperson/${data.idperson}`}
+                to={`/administration/editposition/${data.idposition}`}
                 >Edit
             </Link>
             
@@ -26,48 +26,46 @@ const administrador_opciones = (data)=>{
     
 }
 
+const PositionsRecordsDataTable = (props) =>{
 
-
-const PersonsRecordsDataTable = (props) =>{
-
-    const {persons_fr, fetchData} = props;
-    const [data, setData] = useState(persons_model([]).data);
+    const {positions_fr, fetchData} = props;
+    const [data, setData] = useState(positions_model([]).data);
 
     const handleOnClick = useCallback((e)=>{
         let field= e.currentTarget;
         // //console.log(e.currentTarget.cells[1])
-        let idperson=parseInt(field.cells[0].innerText)
-        let firstName=`${field.cells[2].innerText}`
-        let lastName=`${field.cells[3].innerText}`
+        let idposition=parseInt(field.cells[0].innerText)
+        let position=`${field.cells[1].innerText}`
+        let is_active=`${field.cells[2].innerText}`
        
-        let person={
-            idperson, firstName, lastName
+        let positions={
+            idposition, position, is_active
         }
 
         if(fetchData){
-            fetchData(person)
+            fetchData(positions)
         }
 
     },[])
 
     useEffect(()=>{
 
-        if(persons_fr.data !== undefined){
+        if(positions_fr.data !== undefined){
             let funcion='clickEvent'
 
-            for(let i=0; i<persons_fr.data.rows.length; i++){
-                Object.defineProperty(persons_fr.data.rows[i], funcion, {value: handleOnClick, writable: true})
+            for(let i=0; i<positions_fr.data.rows.length; i++){
+                Object.defineProperty(positions_fr.data.rows[i], funcion, {value: handleOnClick, writable: true})
                 if(!fetchData){
-                    Object.defineProperty(persons_fr.data.rows[i], 'options', {
-                        value: administrador_opciones(persons_fr.data.rows[i]), configurable: true}) 
+                    Object.defineProperty(positions_fr.data.rows[i], 'options', {
+                        value: administrador_opciones(positions_fr.data.rows[i]), configurable: true}) 
                 }
                 
             }
             
-            setData(persons_fr.data);
+            setData(positions_fr.data);
         }
 
-    },[persons_fr, handleOnClick])
+    },[positions_fr, handleOnClick])
 
     return (
         <div className="border py-4 px-4">
@@ -82,4 +80,4 @@ const PersonsRecordsDataTable = (props) =>{
     )
 }
 
-export default connect(mapStateToProps)(PersonsRecordsDataTable);
+export default connect(mapStateToProps)(PositionsRecordsDataTable);

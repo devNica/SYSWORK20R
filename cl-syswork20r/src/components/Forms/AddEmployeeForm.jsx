@@ -4,19 +4,37 @@ import {useForm} from 'react-hook-form'
 import SearchIcon from '@material-ui/icons/Search';
 import SaveIcon from '@material-ui/icons/Save';
 import './AddPersonForm.css'
+import PersonSearchForm from '../Modal/PersonSearchForm';
+import { useState } from 'react';
+import PositionSearchForm from '../Modal/PositionSearchForm';
 
 const mapStateToProps = state =>({
-
+   currencies_fr: state.accounting.currencies
 })
 
-const AddEmployeeForm = ()=>{
+const AddEmployeeForm = (props)=>{
 
     const {register, errors, handleSubmit} = useForm();
+    const [person, setPerson] = useState('');
+    const [position, setPosition] = useState('');
+    const {currencies_fr} = props;
 
     const onsubmit = (data, e) =>{
         console.log(data)
         //e.target.reset();
     }
+
+    const getPerson = data =>{
+        setPerson(data)
+    }
+
+    const getPosition = data =>{
+        setPosition(data)
+    }
+
+    const listCurrencies = currencies_fr.map((ele, i)=>(
+        <option key={i} value={ele.idcurrency}>{ele.description}</option>
+    ))
 
     return (
         <Fragment>
@@ -28,7 +46,8 @@ const AddEmployeeForm = ()=>{
                             <label htmlFor="dni">DNI:</label>
                             <input
                                 name="emp_number"
-                                id="emp_number" 
+                                id="emp_number"
+                                disabled={true} 
                                 type="text" 
                                 className="form-control" 
                                 placeholder="Enter the employee's identification"
@@ -72,6 +91,7 @@ const AddEmployeeForm = ()=>{
                                         }
                                     >
                                         <option value="0">Select an option</option>
+                                        {listCurrencies}
                                     </select>
                                 </div>
                             </div>
@@ -88,6 +108,8 @@ const AddEmployeeForm = ()=>{
                                     className="form-control mx-2 font-weight-bold h5"
                                     id="person"
                                     name="person"
+                                    readOnly="readonly"
+                                    value={person !== '' ? `${person.firstName} - ${person.lastName}` : ''}
                                     placeholder="*click on the magnifying glass please"
                                     ref={
                                         register({
@@ -100,7 +122,7 @@ const AddEmployeeForm = ()=>{
                                         type="button"
                                         className="btn btn-sm color-button-modal btn-dark"
                                         data-toggle="modal"
-                                        data-target="#searchPerson"
+                                        data-target="#personSearch"
                                     >
                                     <SearchIcon fontSize="small" />
                                     </button>
@@ -120,6 +142,8 @@ const AddEmployeeForm = ()=>{
                                     className="form-control mx-2 font-weight-bold h5"
                                     id="position"
                                     name="position"
+                                    readOnly="readonly"
+                                    value={position !== '' ? `${position.position}`: ''}
                                     placeholder="*click on the magnifying glass please"
                                     ref={
                                         register({
@@ -132,7 +156,7 @@ const AddEmployeeForm = ()=>{
                                         type="button"
                                         className="btn btn-sm color-button-modal btn-dark"
                                         data-toggle="modal"
-                                        data-target="#searchPosition"
+                                        data-target="#positionSearch"
                                     >
                                     <SearchIcon fontSize="small" />
                                     </button>
@@ -188,6 +212,9 @@ const AddEmployeeForm = ()=>{
                     </form>
                 </div>
             </div>
+
+            <PersonSearchForm fetchData={getPerson}/>
+            <PositionSearchForm fetchData={getPosition}/>
         </Fragment>
     )
 }

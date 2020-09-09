@@ -7,7 +7,8 @@ const queryAdministrationModel = {
 
     person:{
 
-        view_persons_records: ` SELECT 
+        view_persons_records: (data)=>{
+            let query = ` SELECT 
             P.idperson,
             P.dni,
             P.first_name,
@@ -21,12 +22,13 @@ const queryAdministrationModel = {
             P.is_customer,
             P.is_staff
     
-    
             FROM person as P
             INNER JOIN degree as D ON D.iddegree = P.fk_degree
-            WHERE 1
+            WHERE ${data.filter}
             `
-        ,
+            console.log(query)
+            return query
+        },
 
         get_person: (idperson)=>{
             return ` SELECT 
@@ -90,6 +92,19 @@ const queryAdministrationModel = {
             is_active = ${data.active}
             WHERE person.idperson = ${data.idperson}`
             return query
+        }
+    },
+
+    position:{
+        jobs_list: (data)=>{
+            return `SELECT 
+            PST.idposition,
+            PST.position,
+            PST.is_active,
+            if(PST.is_active = 1, 'ACTIVE', 'INACTIVE')AS state
+            
+            FROM position as PST  
+            WHERE ${data.filter}`
         }
     }
 }
