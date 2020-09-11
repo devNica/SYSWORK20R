@@ -7,6 +7,7 @@ import './AddPersonForm.css'
 import PersonSearchForm from '../Modal/PersonSearchForm';
 import { useState } from 'react';
 import PositionSearchForm from '../Modal/PositionSearchForm';
+import LocationSearchForm from '../Modal/LocationSearchForm';
 
 const mapStateToProps = state =>({
    currencies_fr: state.accounting.currencies
@@ -17,6 +18,7 @@ const AddEmployeeForm = (props)=>{
     const {register, errors, handleSubmit} = useForm();
     const [person, setPerson] = useState('');
     const [position, setPosition] = useState('');
+    const [location, setLocation] = useState('');
     const {currencies_fr} = props;
 
     const onsubmit = (data, e) =>{
@@ -30,6 +32,10 @@ const AddEmployeeForm = (props)=>{
 
     const getPosition = data =>{
         setPosition(data)
+    }
+
+    const getLocation = data => {
+        setLocation(data)
     }
 
     const listCurrencies = currencies_fr.map((ele, i)=>(
@@ -66,7 +72,7 @@ const AddEmployeeForm = (props)=>{
                                         type="number"
                                         id="salary"
                                         name="salary"
-                                        className="form-control"
+                                        className="form-control mx-2 font-weight-bold h5"
                                         placeholder="Enter the employees´s salary"
                                         ref={
                                             register({
@@ -178,6 +184,8 @@ const AddEmployeeForm = (props)=>{
                                             className="form-control mx-2 font-weight-bold h5"
                                             id="location"
                                             name="location"
+                                            readOnly="readonly"
+                                            value={location !== '' ? `${location.location}`: ''}
                                             placeholder="*click on the magnifying glass please"
                                             ref={
                                                 register({
@@ -190,7 +198,7 @@ const AddEmployeeForm = (props)=>{
                                                 type="button"
                                                 className="btn btn-sm color-button-modal btn-dark"
                                                 data-toggle="modal"
-                                                data-target="#searchLocation"
+                                                data-target="#locationSearch"
                                                
                                             >
                                             <SearchIcon fontSize="small" />
@@ -215,6 +223,9 @@ const AddEmployeeForm = (props)=>{
 
             <PersonSearchForm fetchData={getPerson}/>
             <PositionSearchForm fetchData={getPosition}/>
+            <LocationSearchForm fetchData={getLocation}/>
+
+
         </Fragment>
     )
 }

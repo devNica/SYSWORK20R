@@ -1,4 +1,4 @@
-import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON, GET_JOBS_LIST} from './types';
+import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON, GET_JOBS_LIST, GET_LOCATIONS_LIST, GET_EMPLOYEE_NUMBER} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -74,6 +74,34 @@ export const fn_get_jobs_list = data => dispatch => {
                 positions: info
             }
            
+        })
+    })
+    .catch(error => console.log(error))
+}
+
+
+export const fn_get_locations_list = data => dispatch => {
+    api.administration.get_locations_list(data)
+    .then(response => {
+        let info = models.locations(response.locations)
+        dispatch({
+            type: GET_LOCATIONS_LIST,
+            payload:{
+                locations: info
+            }
+        })
+    })
+    .catch(error => console.log(error))
+}
+
+export const fn_get_employee_number = () => dispatch =>{
+    api.administration.get_employee_numer()
+    .then(response => {
+        dispatch({
+            type: GET_EMPLOYEE_NUMBER,
+            payload:{
+                emp_number: response.data
+            }
         })
     })
     .catch(error => console.log(error))
