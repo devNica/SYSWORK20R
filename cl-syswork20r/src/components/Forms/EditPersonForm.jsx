@@ -55,7 +55,11 @@ const EditPersonForm = (props) =>{
         data.active = parseInt(data.active)
         fn_edit_person_record(data);
         //e.target.reset();
-        history.push('/administration/viewpersonsrecords')
+        setTimeout(() => {
+            history.push('/administration/viewpersonsrecords')
+        }, 250);
+
+        
     }
 
     const degreeList = degrees_fr.map((e, i)=>(
