@@ -25,6 +25,10 @@ export default {
             axios.post('/api/administration/edit_person_record',{data}).then(res => res.data),
         get_job_list: data =>
             axios.post('/api/administration/jobs_list', {data}).then(res => res.data),
+        get_locations_list: data =>
+            axios.post('/api/administration/locations_list', {data}).then(res => res.data),
+        get_employee_numer: data =>
+            axios.get('/api/administration/get_employee_number').then(res => res.data),
     },
 
     accounting:{

@@ -45,4 +45,18 @@ router.post('/administration/jobs_list', (req, res)=>{
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
 
+router.post('/administration/locations_list', (req, res)=>{
+    let filter = req.body.data;
+    administration.get_list_locations(filter).then(result=>{
+        res.status(200).json({flag: true, locations: result.rows})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+})
+
+
+router.get('/administration/get_employee_number', (req, res)=>{
+    administration.suggest_employee_number().then(result=>{
+        res.status(200).json({flag: true, data: result.rows})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+})
+
 module.exports = router;
