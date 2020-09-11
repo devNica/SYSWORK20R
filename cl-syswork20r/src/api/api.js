@@ -44,3 +44,13 @@ export default {
             axios.post('/api/tools/update-user-notification-status', data).then(res => res.data),
     }
 }
+
+
+export const uploadImage = data => {
+    return axios.post('/api/user/upload/image',
+        data, { headers: { 'content-type': 'multipart/form-data' } }).then(res => { return res.data })
+}
+
+export const downloadImage = data => {
+    return axios.post('/api/user/download/image', data).then(res => { return res.data })
+}
