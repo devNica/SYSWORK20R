@@ -1,7 +1,7 @@
 var mysql = require('mysql2/promise');
 var { cnc } = require('../../database/connection');
 var config = require('../../database/config');
-var {degrees, person, position} = require('../querys/administration');
+var {degrees, person, employee, position, location} = require('../querys/administration');
 
 let configuration = {
     host: config.db.host,
@@ -36,6 +36,14 @@ const administrationModelController = {
 
     get_jobs_list: data => {
         return cnc(mysql, configuration, position.jobs_list(data))
+    },
+
+    get_list_locations: data =>{
+        return cnc(mysql, configuration, location.locations_list(data))
+    },
+
+    suggest_employee_number: ()=>{
+        return cnc(mysql, configuration, employee.sf_suggest_employee_number)
     },
    
 }
