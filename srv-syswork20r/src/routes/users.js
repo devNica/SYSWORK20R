@@ -1,7 +1,11 @@
 let router = require('express').Router();
 let userModelController = require('../management/users/users')
+let adminModelController = require('../management/administration/administration')
 let bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
+let fs = require("fs");
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' })
 const SECURITY_KEY = process.env.SECURITY_KEY;
 
 router.post('/user/signin', (req, res) => {
@@ -35,6 +39,30 @@ router.post('/user/signin', (req, res) => {
     .catch(err=>{
         res.status(200).json({error: err})
     })
+
+})
+
+
+router.post('/user/upload_image', upload.single('image'), (req, res) => {
+    var imageData = fs.readFileSync(req.file.path);
+    
+    //console.log('esta es la imagen que recibo', imageData);
+    //console.log('id que recibo', req.body.idPerson)
+    let data={
+        idemployee: req.body.data.idemployee,
+        photo: imageData
+    }
+
+    adminModelController.change_profile_picture(data).then(result=>{
+        res.status(200).json({flag: true, msg: `The image has been successfully changed`})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+
+})
+
+router.post('/user/download_image', (req, res) => {
+   adminModelController.get_profile_picture().then(result=>{
+    res.status(200).json({flag: true, msg: `The image has been successfully changed`})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 
 })
 
