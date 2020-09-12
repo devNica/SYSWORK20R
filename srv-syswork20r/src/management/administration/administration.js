@@ -45,6 +45,14 @@ const administrationModelController = {
     suggest_employee_number: ()=>{
         return cnc(mysql, configuration, employee.sf_suggest_employee_number)
     },
+
+    change_profile_picture: data => {
+        return cnc(mysql, configuration, employee.upload_image(data))
+    },
+
+    get_profile_picture: data =>{
+        return cnc(mysql, configuration, employee.download_image(data))
+    }
    
 }
 

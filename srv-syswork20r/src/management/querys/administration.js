@@ -8,6 +8,14 @@ const queryAdministrationModel = {
     employee:{
         /**stored function*/
         sf_suggest_employee_number: `SELECT FN_SUGGEST_EMPLOYEE_NUMBER() AS emp_number`,
+
+        upload_image: (data)=>{
+            return `UPDATE employee SET  employee.photo = ${data.photo}  WHERE employee.idemployee = ${data.idemployee}`
+        },
+
+        download_image: (data)=>{
+            return `SELECT employee.photo FROM employee WHERE ${data.filter}`
+        },
     },
 
     person:{
