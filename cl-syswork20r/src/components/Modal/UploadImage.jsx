@@ -9,7 +9,7 @@ const mapStateToProps = state =>({
 const UploadImage = (props) => {
 
     const [fileSelected, setFile] = useState('');
-    const {employee_fr} = props;
+    const {employee_fr, fk_employee} = props;
     
     const fileSelecttedHandler = e =>{
         //console.log(e.target.files[0]);
@@ -32,8 +32,9 @@ const UploadImage = (props) => {
         else{
             const fd = new FormData();
             fd.append('image', fileSelected, fileSelected.name);
-            fd.append('employeeID', employee_fr.idemployee)
+            fd.append('fk_employee', fk_employee)
             uploadImage(fd).then(res=>{
+                console.log(res)
                 // this.createNotifiacion(res.msg, res.type,'', 3500);
             });
         }

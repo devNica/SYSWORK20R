@@ -27,7 +27,7 @@ const Profile = ({user_fr}) =>{
                         <figcaption><AddTwoToneIcon className="icon" style={{ fontSize: 95}} /></figcaption>
                         <a type="button" data-toggle="modal" data-target="#uploadImageModal" href="#" />
                     </figure>
-                    <UploadImage employeeID={user_fr.iduser} />
+                    <UploadImage fk_employee={user_fr.fk_employee} />
                     <table className="table table-hover">
                         <tbody>
                             <tr style={{fontSize: '0.95rem'}}>
