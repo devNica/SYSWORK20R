@@ -20,6 +20,36 @@ const queryAdministrationModel = {
             let query = `SELECT employee.photo FROM employee WHERE employee.idemployee = ${data.filter}`
             return query
         },
+
+        create_employee_record: (data)=>{
+            let query = `INSERT INTO employee (
+                idemployee, 
+                emp_number, 
+                salary, 
+                fk_currency, 
+                fk_person, 
+                fk_position, 
+                fk_location, 
+                is_active, 
+                is_user,
+                created_at,
+                updated_at,
+                photo) 
+                VALUES (
+                NULL, 
+                '${data.emp_number}', 
+                ${data.salary}, 
+                ${data.currency}, 
+                ${data.fk_person}, 
+                ${data.fk_position}, 
+                ${data.fk_location}, 
+                '1', 
+                '0',
+                '${data.created_at}',
+                '${data.updated_at}',
+                NULL)`
+            return query
+        },
     },
 
     person:{
@@ -41,10 +71,10 @@ const queryAdministrationModel = {
     
             FROM person as P
             INNER JOIN degree as D ON D.iddegree = P.fk_degree
+            LEFT  JOIN employee AS EMP ON EMP.fk_person = P.idperson
             WHERE ${data.filter}
             `
-            console.log(query)
-            return query
+           return query
         },
 
         get_person: (idperson)=>{

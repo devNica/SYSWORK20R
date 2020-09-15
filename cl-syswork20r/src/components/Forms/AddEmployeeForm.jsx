@@ -8,9 +8,11 @@ import PersonSearchForm from '../Modal/PersonSearchForm';
 import { useState } from 'react';
 import PositionSearchForm from '../Modal/PositionSearchForm';
 import LocationSearchForm from '../Modal/LocationSearchForm';
+import {fn_create_employee_record} from '../../redux/actions/administration';
 
 const mapStateToProps = state =>({
-   currencies_fr: state.accounting.currencies
+   currencies_fr: state.accounting.currencies,
+   employee_fr: state.administration.employee
 })
 
 const AddEmployeeForm = (props)=>{
@@ -19,11 +21,16 @@ const AddEmployeeForm = (props)=>{
     const [person, setPerson] = useState('');
     const [position, setPosition] = useState('');
     const [location, setLocation] = useState('');
-    const {currencies_fr} = props;
+    const {currencies_fr, employee_fr, fn_create_employee_record} = props;
 
     const onsubmit = (data, e) =>{
+        data.salary = parseInt(data.salary)
+        data.fk_location = location.idlocation
+        data.fk_position = position.idposition 
+        data.fk_person = person.idperson
         console.log(data)
-        //e.target.reset();
+        e.target.reset();
+        fn_create_employee_record(data)
     }
 
     const getPerson = data =>{
@@ -49,14 +56,14 @@ const AddEmployeeForm = (props)=>{
                 <div className="border py-3 px-3">
                     <form onSubmit={handleSubmit(onsubmit)}>
                         <div className="form-group">
-                            <label htmlFor="dni">DNI:</label>
+                            <label htmlFor="dni">EMP NUMBER:</label>
                             <input
                                 name="emp_number"
                                 id="emp_number"
-                                disabled={true} 
+                                readOnly
                                 type="text" 
-                                className="form-control" 
-                                placeholder="Enter the employee's identification"
+                                className="form-control mx-2 font-weight-bold h5"
+                                defaultValue={employee_fr !== undefined ? employee_fr.emp_number : null}
                                 ref={
                                     register({
                                         required: {value: true, message: 'the ID of the employee is required'}
@@ -231,4 +238,4 @@ const AddEmployeeForm = (props)=>{
 }
 
 
-export default connect(mapStateToProps,{})(AddEmployeeForm);
+export default connect(mapStateToProps,{fn_create_employee_record})(AddEmployeeForm);

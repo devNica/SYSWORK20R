@@ -55,8 +55,26 @@ router.post('/administration/locations_list', (req, res)=>{
 
 router.get('/administration/get_employee_number', (req, res)=>{
     administration.suggest_employee_number().then(result=>{
-        res.status(200).json({flag: true, data: result.rows})
+        res.status(200).json({flag: true, data: result.rows[0]})
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+})
+
+router.post('/administration/create_employee_record', (req, res)=>{
+    let data = {
+        emp_number: req.body.emp_number,
+        salary: req.body.salary,
+        currency: req.body.currency,
+        fk_person: req.body.fk_person,
+        fk_position: req.body.fk_position,
+        fk_location: req.body.fk_location,
+        created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+    }
+
+    administration.create_employee_record(data).then(result=>{
+        res.status(200).json({flag: true, msg: 'The record was created successfully'})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+  
 })
 
 module.exports = router;
