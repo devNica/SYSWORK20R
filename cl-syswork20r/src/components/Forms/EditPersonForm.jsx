@@ -15,19 +15,23 @@ const mapStateToProps = state =>({
 const EditPersonForm = (props) =>{
 
     const {register, errors, handleSubmit} = useForm();
-    const [selectedOPtion, setOption] = useState('');
+    
     const [activeOption, setStatus] = useState('');
+    const [customer, setCustomer] = useState(false);
+    const [staff, setStaff] = useState(false);
     const [degreeSelected, setDegree] = useState(0);
     const [permission, setPermission] = useState('')
     const {degrees_fr, person_fr, fn_edit_person_record, history, user_fr} = props;
 
 
     useEffect(()=>{
-        let option = person_fr !== null ? person_fr[0].is_customer ? "customer" : "staff" : null
+        let customer = person_fr !== null ? person_fr[0].is_customer ? true : false: null
+        let staff = person_fr !== null ? person_fr[0].is_staff ? true : false: null
         let status = person_fr !== null ? person_fr[0].is_active ? "1" : "0" : null
         let degree = person_fr !== null ? person_fr[0].iddegree : 0
         let permission = user_fr.permissions.find(element => element === 'status_person_record')
-        setOption(option)
+        setCustomer(customer)
+        setStaff(staff)
         setDegree(degree)
         setStatus(status)
         setPermission(permission)
@@ -35,7 +39,12 @@ const EditPersonForm = (props) =>{
     },[person_fr, user_fr])
 
     const onValueChange=(e) =>{
-        setOption(e.target.value)
+        if(e.target.name === 'customer'){
+            setCustomer(!customer)
+        }
+        else{
+            setStaff(!staff)
+        }
     }
 
     const onStatusChange = e =>{
@@ -49,8 +58,8 @@ const EditPersonForm = (props) =>{
     const onsubmit = (data, e) =>{
 
         data.degree = parseInt(data.degree)
-        data.is_customer = data.type_person === 'customer' ? 1 : 0
-        data.is_staff = data.type_person === 'staff' ? 1 : 0
+        data.is_customer = customer?  1 : 0
+        data.is_staff = staff ? 1 : 0
         data.idperson =  person_fr[0].idperson
         data.active = parseInt(data.active)
         fn_edit_person_record(data);
@@ -236,11 +245,11 @@ const EditPersonForm = (props) =>{
                                 <div className="form-check form-check-inline">
                                     <input 
                                         className="form-check-input" 
-                                        type="radio" 
-                                        name="type_person" 
+                                        type="checkbox" 
+                                        name="customer" 
                                         defaultValue="customer"
                                         
-                                        checked={selectedOPtion==="customer"}
+                                        checked={customer===true}
                                         onChange={onValueChange}
                                         ref={
                                             register({
@@ -253,11 +262,11 @@ const EditPersonForm = (props) =>{
                                 <div className="form-check form-check-inline mb-4 mt-2">
                                     <input 
                                         className="form-check-input" 
-                                        type="radio" 
-                                        name="type_person" 
+                                        type="checkbox" 
+                                        name="staff" 
                                         defaultValue="staff"
                                         
-                                        checked={selectedOPtion==="staff"}
+                                        checked={staff===true}
                                         onChange={onValueChange}
                                         ref={
                                             register({

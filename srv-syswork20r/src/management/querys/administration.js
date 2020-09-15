@@ -64,6 +64,7 @@ const queryAdministrationModel = {
             P.phone,
             D.degree,
             IF(P.is_customer = 1, 'CUSTOMER', 'STAFF') AS type,
+            IF(P.is_customer = 1 AND P.is_staff = 1, 'CUSTOMER / STAFF', IF(P.is_customer = 1 AND P.is_staff = 0, 'CUSTOMER', IF(P.is_customer =0 AND P.is_staff = 1, 'STAFF','NOT DEFFINED'))) AS type,
             IF(P.is_active = 1, "ACTIVE", "INACTIVE") AS state,
             P.is_active,
             P.is_customer,
@@ -121,8 +122,8 @@ const queryAdministrationModel = {
                 '${data.address}', 
                 '${data.phone}', 
                 ${data.degree}, 
-                '${data.customer}', 
-                '${data.staff}')`
+                ${data.customer}, 
+                ${data.staff})`
         },
 
         edit_person_record: (data)=>{
