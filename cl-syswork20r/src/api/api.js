@@ -48,9 +48,9 @@ export default {
 
 export const uploadImage = data => {
     return axios.post('/api/user/upload_image',
-        data, { headers: { 'content-type': 'multipart/form-data' } }).then(res => { return res.data })
+        data, { headers: { 'content-type': 'multipart/form-data' } }).then(res => res.data)
 }
 
 export const downloadImage = data => {
-    return axios.post('/api/user/download_image', data).then(res => { return res.data })
+    return axios.post('/api/user/download_image', data).then(res => res.data)
 }

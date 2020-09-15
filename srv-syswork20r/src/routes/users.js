@@ -3,10 +3,19 @@ let userModelController = require('../management/users/users')
 let adminModelController = require('../management/administration/administration')
 let bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
-let fs = require("fs");
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' })
+require('dotenv').config();
 const SECURITY_KEY = process.env.SECURITY_KEY;
+
+var knex = require('knex')({
+    client: 'mysql',
+    version: '7.4.8',
+    connection: {
+      host : process.env.HOST,
+      user : process.env.NAME,
+      password : process.env.PASSWORD,
+      database : process.env.DATABASE
+    }
+  });
 
 router.post('/user/signin', (req, res) => {
 
@@ -42,27 +51,20 @@ router.post('/user/signin', (req, res) => {
 
 })
 
+router.post('/user/upload_image', async (req, res)=>{
+    const {name, data} = req.files.img;
 
-router.post('/user/upload_image', upload.single('image'), (req, res) => {
-    var imageData = fs.readFileSync(req.file.path);
-    
-    //console.log('esta es la imagen que recibo', imageData);
-    //console.log('id que recibo', req.body.idPerson)
-    let data={
-        idemployee: req.body.data.idemployee,
-        photo: imageData
-    }
-
-    adminModelController.change_profile_picture(data).then(result=>{
-        res.status(200).json({flag: true, msg: `The image has been successfully changed`})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-
+    console.log(data)
+    await knex('employee').update({photo: data}).where({idemployee: req.body.fk_employee});
+    res.status(200).json({flag: true, msg: 'The image has been successfully changed'});
 })
 
 router.post('/user/download_image', (req, res) => {
-   adminModelController.get_profile_picture().then(result=>{
-    res.status(200).json({flag: true, msg: `The image has been successfully changed`})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+    let data={filter: req.body.idemployee}
+    adminModelController.get_profile_picture(data).then(result=>{
+   
+    res.status(200).json({flag: true, photo: result.rows[0].photo})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error.message}))
 
 })
 

@@ -12,32 +12,26 @@ const UploadImage = (props) => {
     const {employee_fr, fk_employee} = props;
     
     const fileSelecttedHandler = e =>{
-        //console.log(e.target.files[0]);
+        let files = e.target.files;
         var reader = new FileReader();
 
         reader.onload = (e)=>{
             document.getElementById('preview').src = e.target.result;
         }
 
-        reader.readAsDataURL(e.target.files[0]);
-        setFile(e.target.files[0]);
+        reader.readAsDataURL(files[0]);
+        setFile(files[0]);
     }
 
     const fileUploadHandler = e =>{
-
+        const fd = new FormData();
+        fd.append('img', fileSelected, fileSelected.name);
+        fd.append('fk_employee', fk_employee)
+        uploadImage(fd).then(res=>{
+            console.log(res)
+           
+        });
         
-        if(fileSelected === ''){
-            // crear una notificacion de que no se ha seleccionado una imagen
-        }
-        else{
-            const fd = new FormData();
-            fd.append('image', fileSelected, fileSelected.name);
-            fd.append('fk_employee', fk_employee)
-            uploadImage(fd).then(res=>{
-                console.log(res)
-                // this.createNotifiacion(res.msg, res.type,'', 3500);
-            });
-        }
     }
 
     
