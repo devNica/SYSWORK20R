@@ -4,7 +4,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
 import AddEmployeeForm from '../../Forms/AddEmployeeForm';
-import {fn_list_persons_records, fn_get_jobs_list, fn_get_locations_list, fn_get_employee_number} from '../../../redux/actions/administration'
+import {fn_list_persons_records, 
+    fn_get_jobs_list, 
+    fn_get_locations_list, 
+    fn_get_employee_number} from '../../../redux/actions/administration'
 import {fn_get_list_currencies} from '../../../redux/actions/accounting';
 
 const mapStateToProps = state => ({
@@ -13,14 +16,15 @@ const mapStateToProps = state => ({
 
 const CreateEmployee = (props) =>{
 
-    const {user_fr, fn_list_persons_records, fn_get_employee_number, fn_get_jobs_list, fn_get_list_currencies, fn_get_locations_list} = props;
+    const {user_fr, fn_list_persons_records, fn_get_employee_number} = props;
+    const {fn_get_jobs_list, fn_get_list_currencies, fn_get_locations_list} = props;
     const [permission, setPermission] = useState('')
     
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'create_employee_record')
         setPermission(permission)
 
-        fn_list_persons_records({filter: `P.is_active = 1 AND P.is_staff = 1`})
+        fn_list_persons_records({filter: `P.is_active = 1 AND P.is_staff = 1 AND EMP.idemployee IS NULL`})
         fn_get_jobs_list({filter: 1})
         fn_get_list_currencies({filter: 1})
         fn_get_locations_list({filter: 1})
@@ -62,4 +66,11 @@ const CreateEmployee = (props) =>{
 }
 
 
-export default connect(mapStateToProps,{fn_list_persons_records, fn_get_employee_number, fn_get_jobs_list, fn_get_list_currencies, fn_get_locations_list})(CreateEmployee);
+export default connect(mapStateToProps,
+    { 
+        fn_list_persons_records, 
+        fn_get_employee_number, 
+        fn_get_jobs_list, 
+        fn_get_list_currencies, 
+        fn_get_locations_list,
+    })(CreateEmployee);

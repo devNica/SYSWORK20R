@@ -52,8 +52,11 @@ const administrationModelController = {
 
     get_profile_picture: data =>{
         return cnc(mysql, configuration, employee.download_image(data))
+    },
+    
+    create_employee_record: data =>{
+        return cnc(mysql, configuration, employee.create_employee_record(data))
     }
-   
 }
 
 module.exports = administrationModelController;
