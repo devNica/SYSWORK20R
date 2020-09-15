@@ -4,6 +4,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import './AddPersonForm.css'
 import {connect} from 'react-redux'
 import {fn_create_person_record} from '../../redux/actions/administration';
+import { useState } from 'react';
 
 const mapStateToProps = state => ({
     degrees_fr: state.administration.degrees,
@@ -12,13 +13,25 @@ const mapStateToProps = state => ({
 const AddPersonForm = (props)=>{
 
     const {register, errors, handleSubmit} = useForm();
+    const [isCustomer, setCustomer]=useState(false);
+    const [isStaff, setStaff]=useState(false);
     const {degrees_fr, fn_create_person_record} = props;
 
     const onsubmit = (data, e) =>{
-        if(!data.customer) data.staff = "1";
-        else data.staff="0";
+        data.customer = isCustomer?1:0
+        data.staff = isStaff?1:0
+        console.log(data)
         fn_create_person_record(data)
         e.target.reset();
+    }
+
+    const handleOnchange=e=>{
+        if(e.target.name === 'customer'){
+            setCustomer(!isCustomer)
+        }
+        else{
+            setStaff(!isStaff)
+        }
     }
 
     const degreeList = degrees_fr.map((degree, i)=>(
@@ -150,30 +163,24 @@ const AddPersonForm = (props)=>{
                         <div className="form-check form-check-inline">
                             <input 
                                 className="form-check-input" 
-                                type="radio" 
+                                type="checkbox" 
                                 name="customer" 
                                 id="customer" 
-                                value="1"
-                                ref={
-                                    register({
-                                        required: {value: true}
-                                    })
-                                }
+                                value={isCustomer}
+                                onChange={handleOnchange}
+                               
                             />
                             <label className="form-check-label" htmlFor="customer">Is Customer?</label>
                         </div>
                         <div className="form-check form-check-inline mb-4 mt-2">
                             <input 
                                 className="form-check-input" 
-                                type="radio" 
-                                name="customer" 
+                                type='checkbox'
+                                name="staff" 
                                 id="staff" 
-                                value="0"
-                                ref={
-                                    register({
-                                        required: {value: true}
-                                    })
-                                }
+                                value={isStaff}
+                                onChange={handleOnchange}
+                                
                             />
                             <label className="form-check-label" htmlFor="staff">Is Staff?</label>
                         </div>
