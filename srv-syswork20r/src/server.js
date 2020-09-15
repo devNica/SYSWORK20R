@@ -1,11 +1,13 @@
 var express = require("express");
 var bodyparser = require("body-parser");
 var cors = require("cors");
+var fileupload = require('express-fileupload');
 
 var app = express();
 var port = process.env.PORT || 4800;
 
 //MIDDLEWARES
+app.use(fileupload());
 app.use(bodyparser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

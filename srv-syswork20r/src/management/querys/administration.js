@@ -10,11 +10,15 @@ const queryAdministrationModel = {
         sf_suggest_employee_number: `SELECT FN_SUGGEST_EMPLOYEE_NUMBER() AS emp_number`,
 
         upload_image: (data)=>{
-            return `UPDATE employee SET  employee.photo = ${data.photo}  WHERE employee.idemployee = ${data.idemployee}`
+            let query=`UPDATE 
+            employee SET photo = '${data.photo}' 
+            WHERE  employee.idemployee = ${data.idemployee}`
+            return query
         },
 
         download_image: (data)=>{
-            return `SELECT employee.photo FROM employee WHERE ${data.filter}`
+            let query = `SELECT employee.photo FROM employee WHERE employee.idemployee = ${data.filter}`
+            return query
         },
     },
 
