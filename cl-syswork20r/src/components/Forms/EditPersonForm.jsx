@@ -66,7 +66,7 @@ const EditPersonForm = (props) =>{
         //e.target.reset();
         setTimeout(() => {
             history.push('/administration/viewpersonsrecords')
-        }, 250);
+        }, 350);
 
         
     }

@@ -1,4 +1,10 @@
-import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON, GET_JOBS_LIST, GET_LOCATIONS_LIST, GET_EMPLOYEE_NUMBER} from './types';
+import {GET_LIST_DEGREES,
+     GET_PERSONS_RECORDS, 
+     GET_PERSON_BY_IDPERSON, 
+     GET_JOBS_LIST, 
+     GET_LOCATIONS_LIST, 
+     GET_EMPLOYEE_NUMBER,
+    CLEAR_PERSONS_RECORDS} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -113,4 +119,10 @@ export const fn_create_employee_record = data => dispatch =>{
         console.log(response)
     })
     .catch(err=>console.log(err))
+}
+
+export const  fn_clear_persons_records = () => dispatch =>{
+    dispatch({
+        type: CLEAR_PERSONS_RECORDS,
+    })
 }
