@@ -251,11 +251,7 @@ const EditPersonForm = (props) =>{
                                         
                                         checked={customer===true}
                                         onChange={onValueChange}
-                                        ref={
-                                            register({
-                                                required: {value: true}
-                                            })
-                                        }
+                                       
                                     />
                                     <label className="form-check-label" htmlFor="customer">Is Customer?</label>
                                 </div>
@@ -265,14 +261,10 @@ const EditPersonForm = (props) =>{
                                         type="checkbox" 
                                         name="staff" 
                                         defaultValue="staff"
-                                        
+                                        disabled = {person_fr !== null ? person_fr[0].emp_is_active ? 1 : 0 : null}
                                         checked={staff===true}
                                         onChange={onValueChange}
-                                        ref={
-                                            register({
-                                                required: {value: true}
-                                            })
-                                        }
+                                        
                                     />
                                     <label className="form-check-label" htmlFor="staff">Is Staff?</label>
                                 </div> 
