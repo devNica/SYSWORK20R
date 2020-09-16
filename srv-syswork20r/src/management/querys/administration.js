@@ -92,11 +92,13 @@ const queryAdministrationModel = {
             IF(P.is_active = 1, "ACTIVE", "INACTIVE") AS state,
             P.is_active,
             P.is_customer,
-            P.is_staff
+            P.is_staff,
+            EMP.is_active as emp_is_active
     
     
             FROM person as P
             INNER JOIN degree as D ON D.iddegree = P.fk_degree
+            LEFT JOIN employee as EMP ON EMP.fk_person = P.idperson
             WHERE P.idperson = ${idperson}
             `
 
