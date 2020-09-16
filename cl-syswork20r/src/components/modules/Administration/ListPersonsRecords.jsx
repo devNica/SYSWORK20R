@@ -1,7 +1,7 @@
 import React,{Fragment, useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import PersonsRecordsDataTable from '../../DataTables/PersonsRecordsDataTable'
-import {fn_list_persons_records} from '../../../redux/actions/administration'
+import {fn_list_persons_records, fn_clear_persons_records} from '../../../redux/actions/administration'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
@@ -10,15 +10,20 @@ const mapStateToProps = (state) =>({
     user_fr: state.auth.user,
 })
 
-const ListPersonsRecords = ({user_fr, fn_list_persons_records})=> {
+const ListPersonsRecords = (props)=> {
 
     const [permission, setPermission] = useState('')
+    const {user_fr, fn_list_persons_records, fn_clear_persons_records} = props;
     
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'view_persons_records')
         setPermission(permission)
 
         fn_list_persons_records({filter:1})
+
+        return()=>{
+            fn_clear_persons_records();
+        }
 
     },[user_fr, fn_list_persons_records])
 
@@ -58,4 +63,4 @@ const ListPersonsRecords = ({user_fr, fn_list_persons_records})=> {
 
 }
 
-export default connect(mapStateToProps,{fn_list_persons_records})(ListPersonsRecords);
+export default connect(mapStateToProps,{fn_list_persons_records, fn_clear_persons_records})(ListPersonsRecords);

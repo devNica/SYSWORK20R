@@ -1,4 +1,10 @@
-import {GET_LIST_DEGREES, GET_PERSONS_RECORDS, GET_PERSON_BY_IDPERSON, GET_JOBS_LIST, GET_LOCATIONS_LIST,GET_EMPLOYEE_NUMBER} from '../actions/types';
+import {GET_LIST_DEGREES, 
+    GET_PERSONS_RECORDS, 
+    GET_PERSON_BY_IDPERSON, 
+    GET_JOBS_LIST, 
+    GET_LOCATIONS_LIST,
+    GET_EMPLOYEE_NUMBER,
+CLEAR_PERSONS_RECORDS} from '../actions/types';
 
 const initialState = {
    degrees: [],
@@ -46,6 +52,11 @@ export default function (state = initialState, action){
                     ...state,
                     employee: action.payload.emp_number
                 }
+        case CLEAR_PERSONS_RECORDS:
+            return{
+                ...state,
+                persons: []
+            }
 
         default:
             return state;
