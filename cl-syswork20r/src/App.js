@@ -10,6 +10,7 @@ import CreatePerson from './components/modules/Administration/CreatePerson';
 import ListPersonsRecords from './components/modules/Administration/ListPersonsRecords';
 import EditPerson from './components/modules/Administration/EditPerson';
 import CreateEmployee from './components/modules/Administration/CreateEmployee';
+import ListEmployeesRecords from './components/modules/Administration/ListEmployeesRecords';
 
 const App = ({ location }) => {
 
@@ -21,6 +22,7 @@ const App = ({ location }) => {
         <GuestRoute location={location} exact path='/signin' component={Signin} />
         <PrivateRoute location={location} exact path='/administration/addperson' component={CreatePerson}/>
         <PrivateRoute location={location} exact path='/administration/viewpersonsrecords' component={ListPersonsRecords}/>
+        <PrivateRoute location={location} exact path='/administration/viewemployeesrecords' component={ListEmployeesRecords}/>
         <PrivateRoute location={location} exact path='/administration/editperson/:id' component={EditPerson} />
         <PrivateRoute location={location} exact path='/administration/addemployee' component={CreateEmployee}/>
     </Fragment>

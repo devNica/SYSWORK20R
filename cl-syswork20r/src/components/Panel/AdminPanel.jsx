@@ -8,8 +8,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import EditIcon from '@material-ui/icons/Edit';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import PersonIcon from '@material-ui/icons/Person';
-import ViewListIcon from '@material-ui/icons/ViewList';
-
+import DnsIcon from '@material-ui/icons/Dns';
 
 const AdminPanel = (props) => {
     const {modules} = props;
@@ -57,13 +56,16 @@ const AdminPanel = (props) => {
                 <AssignmentIndIcon  style={{ color: "#5094de"}} fontSize="small"/> Staff
                 </button>
                 <div className="dropdown-menu" aria-labelledby="staff-module-dropdown">
+                
+                <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_employee" to='/administration/viewemployeesrecords'>
+                    <DnsIcon  style={{ color: "#5094de"}} fontSize="medium"/> View Records
+                </Link>
+
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_employee" to='/administration/addemployee'> 
                     <PersonAddIcon  style={{ color: "#5094de"}} fontSize="small"/> Add Employee
                 </Link>
                 
-                <button className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_employee" onClick={handleOnClick}>
-                    <EditIcon  style={{ color: "#5094de"}} fontSize="small"/> Edit Employee
-                </button>
+                
                 
                 </div>
             </div>
@@ -76,7 +78,7 @@ const AdminPanel = (props) => {
                 <div className="dropdown-menu" aria-labelledby="person-module-dropdown">
                 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="view_person" to='/administration/viewpersonsrecords'>
-                    <ViewListIcon  style={{ color: "#5094de"}} fontSize="small"/> View Records
+                    <DnsIcon  style={{ color: "#5094de"}} fontSize="medium"/> View Records
                 </Link>
                 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_person" to='/administration/addperson'> 
