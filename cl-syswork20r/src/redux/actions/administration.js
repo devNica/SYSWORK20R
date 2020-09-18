@@ -4,7 +4,8 @@ import {GET_LIST_DEGREES,
      GET_JOBS_LIST, 
      GET_LOCATIONS_LIST, 
      GET_EMPLOYEE_NUMBER,
-    CLEAR_PERSONS_RECORDS} from './types';
+    CLEAR_PERSONS_RECORDS,
+    GET_EMPLOYEES_RECORDS} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -125,4 +126,17 @@ export const  fn_clear_persons_records = () => dispatch =>{
     dispatch({
         type: CLEAR_PERSONS_RECORDS,
     })
+}
+
+
+export const fn_list_employees_records = data => dispatch =>{
+    api.administration.view_employees_records(data)
+    .then(response =>{
+        let info = models.employees(response.employees)
+        dispatch({
+            type: GET_EMPLOYEES_RECORDS,
+            payload: info
+        })
+    })
+    .catch(error => console.log(error))
 }

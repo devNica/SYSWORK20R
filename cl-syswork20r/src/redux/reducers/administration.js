@@ -4,7 +4,8 @@ import {GET_LIST_DEGREES,
     GET_JOBS_LIST, 
     GET_LOCATIONS_LIST,
     GET_EMPLOYEE_NUMBER,
-CLEAR_PERSONS_RECORDS} from '../actions/types';
+CLEAR_PERSONS_RECORDS, 
+GET_EMPLOYEES_RECORDS} from '../actions/types';
 
 const initialState = {
    degrees: [],
@@ -12,7 +13,8 @@ const initialState = {
    person_found: null,
    positions: [],
    locations: [],
-   employee: {}
+   employee: {},
+   employees: []
 }
 
 export default function (state = initialState, action){
@@ -56,6 +58,11 @@ export default function (state = initialState, action){
             return{
                 ...state,
                 persons: []
+            }
+        case GET_EMPLOYEES_RECORDS:
+            return {
+                ...state,
+                employees: action.payload
             }
 
         default:
