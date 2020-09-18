@@ -13,7 +13,7 @@ const administrador_opciones = (data)=>{
     let options = (
         <div>
             <Link 
-                className="btn btn-sm btn-dark color-button-edit" 
+                className="btn btn-sm btn-dark color-button-edit-employee" 
                 //value={tasks.data.rows[i].idregin} 
                 to={`/administration/editemployee/${data.idemployee}`}
                 >Edit

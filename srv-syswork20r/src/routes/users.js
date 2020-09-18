@@ -1,6 +1,6 @@
 let router = require('express').Router();
 let userModelController = require('../management/users/users')
-let adminModelController = require('../management/administration/administration')
+let adminModelController = require('../management/administration')
 let bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
