@@ -56,6 +56,10 @@ const administrationModelController = {
     
     create_employee_record: data =>{
         return cnc(mysql, configuration, employee.create_employee_record(data))
+    },
+
+    list_employees_records: data =>{
+        return cnc(mysql, configuration, employee.list_employees_records(data))
     }
 }
 

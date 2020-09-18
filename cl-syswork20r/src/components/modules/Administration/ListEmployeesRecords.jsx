@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
+import EmployeesRecordsDataTable from '../../DataTables/EmployeesRecordsDataTable';
+import {fn_list_employees_records} from '../../../redux/actions/administration';
 
 const mapStateToProps = (state) =>({
     user_fr: state.auth.user,
@@ -11,17 +13,18 @@ const mapStateToProps = (state) =>({
 const ListEmployessRecords = (props)=> {
 
     const [permission, setPermission] = useState('')
-    const {user_fr} = props;
+    const {user_fr, fn_list_employees_records} = props;
     
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'view_employees_records')
+        fn_list_employees_records({filter: 1})
         setPermission(permission)
 
        return()=>{
            
         }
 
-    },[user_fr])
+    },[user_fr, fn_list_employees_records])
 
     const linkOptions = (
         <Fragment>
@@ -43,7 +46,7 @@ const ListEmployessRecords = (props)=> {
             </nav>
 
             <div id="content">
-                {permission === '' ? null : permission === 'view_persons_records' ? <h1>componente</h1>: <Denied/>}
+                {permission === '' ? null : permission === 'view_employees_records' ? <EmployeesRecordsDataTable/>: <Denied/>}
             </div>
         </Fragment>
     )
@@ -57,4 +60,4 @@ const ListEmployessRecords = (props)=> {
 
 }
 
-export default connect(mapStateToProps,{})(ListEmployessRecords);
+export default connect(mapStateToProps,{fn_list_employees_records})(ListEmployessRecords);
