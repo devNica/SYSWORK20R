@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let accounting = require('../management/accounting/accounting');
+let accounting = require('../management/accounting');
 
 router.post('/accounting/list_currencies', (req, res)=>{
     let filter = req.body.data

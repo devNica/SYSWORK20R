@@ -1,5 +1,5 @@
 let router = require('express').Router();
-let administration = require('../management/administration/administration');
+let administration = require('../management/administration');
 
 
 router.get('/administration/list_degrees', (req, res)=>{

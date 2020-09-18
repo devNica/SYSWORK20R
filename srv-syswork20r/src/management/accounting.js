@@ -1,7 +1,7 @@
 var mysql = require('mysql2/promise');
-var { cnc } = require('../../database/connection');
-var config = require('../../database/config');
-var {currency} = require('../querys/accounting');
+var { cnc } = require('../database/connection');
+var config = require('../database/config');
+var currency = require('./querys/accounting');
 
 let configuration = {
     host: config.db.host,
