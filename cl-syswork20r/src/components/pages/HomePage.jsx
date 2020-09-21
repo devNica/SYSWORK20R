@@ -12,24 +12,24 @@ const HomePage = () => {
                     Soporte Online: Es us sistema pensado en
                 </p> */}
                 <hr className="mt-4"/>
-                <h4 style={{color: '#5475a7'}}>
-                    SysWork20R te ofrece las siguientes funcionalidades:
-                </h4>
+                <h5 style={{color: '#5475a7'}}>
+                    SysWork20R offers you the following features and functionalities:
+                </h5>
                 <ul>
                     <li>
-                        Gestionar Tareas para el departamento TI
+                        Purchases and imports module
                     </li>
                     <li>
-                        Seguimiento y control de asignaciones realizadas
+                        Finance and accounting module
                     </li>
                     <li>
-                        Medir la demanda de trabajo y efectividad de las atenciones
+                       Inventory module
                     </li>
                     <li>
-                        Exportar datos a Excel, para reportes personalizados
+                        User accounts module
                     </li>
                     <li>
-                        Reportar tareas realizadas externas al taller
+                        Sales and quotes module
                     </li>
                 </ul>
             </div>
@@ -39,16 +39,16 @@ const HomePage = () => {
                 <IconoTecnologia icono={`${process.env.PUBLIC_URL}logo1.png`} descripcion="Javascript"/>
                 <IconoTecnologia icono="logo2.png" descripcion="MySQL"/>
                 <IconoTecnologia icono="logo3.png" descripcion="NodeJS"/>
-                <IconoTecnologia icono="logo5.png" descripcion="ReactJS"/>
-                <IconoTecnologia icono="logo6.png" descripcion="Redux"/>
-                <IconoTecnologia icono="logo7.png" descripcion="ChartJS"/>
+                <IconoTecnologia icono="logo9.png" descripcion="React/Redux"/>
+                <IconoTecnologia icono="logo10.png" descripcion="Boostrap"/>
+                <IconoTecnologia icono="logo8.png" descripcion="Next"/>
                
             </div>
 
             <div className="row mt-4">
                 <div className="col-12">
                     <div className="alert alert-dark text-center">
-                        ® Querybirdcode -/- Paul Maxwell & Vanessa Cruma & Alexander Rosales 
+                        ® Querybirdcode -/- Alejandro G. Sanchez 
                     </div>
                 </div>
                 
