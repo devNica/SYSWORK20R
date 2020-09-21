@@ -28,7 +28,7 @@ const queryEmployeeModel = {
         LCT.idlocation,
         IF(EMP.is_active = 1, 'ACTIVE', 'INACTIVE') AS state,
         EMP.is_active,
-        IF(EMP.is_user = 1, 'N-ACC', 'W-ACC') as access,
+        IF(EMP.is_user = 1, 'W-ACC', 'N-ACC') as access,
         EMP.is_user
         
         
