@@ -11,6 +11,7 @@ import ListPersonsRecords from './components/modules/Administration/ListPersonsR
 import EditPerson from './components/modules/Administration/EditPerson';
 import CreateEmployee from './components/modules/Administration/CreateEmployee';
 import ListEmployeesRecords from './components/modules/Administration/ListEmployeesRecords';
+import EditEmployee from './components/modules/Administration/EditEmployee';
 
 const App = ({ location }) => {
 
@@ -25,6 +26,8 @@ const App = ({ location }) => {
         <PrivateRoute location={location} exact path='/administration/viewemployeesrecords' component={ListEmployeesRecords}/>
         <PrivateRoute location={location} exact path='/administration/editperson/:id' component={EditPerson} />
         <PrivateRoute location={location} exact path='/administration/addemployee' component={CreateEmployee}/>
+        <PrivateRoute location={location} exact path='/administration/editemployee/:id' component={EditEmployee} />
+        
     </Fragment>
   );
 
