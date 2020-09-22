@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
-import EditEmployeeForm from '../../Forms/EditEmployeeForm';
+import EmployeeEditForm from '../../Forms/EmployeeEditForm';
 import {fn_get_employee_byID, fn_get_jobs_list, fn_get_locations_list} from '../../../redux/actions/administration'
 import {fn_get_list_currencies} from '../../../redux/actions/accounting';
 
@@ -25,7 +25,7 @@ const EditEmployee = (props) =>{
         fn_get_jobs_list({filter: 1})
         fn_get_locations_list({filter: 1})
 
-    },[user_fr, fn_get_employee_byID, fn_get_list_currencies])
+    },[user_fr, fn_get_employee_byID, fn_get_list_currencies, fn_get_jobs_list, fn_get_locations_list, match])
 
     const linkOptions = (
         <Fragment>
@@ -47,7 +47,7 @@ const EditEmployee = (props) =>{
             </nav>
 
             <div id="content">
-                {permission === '' ? null : permission === 'edit_employee_record' ? <EditEmployeeForm history={props.history}/>: <Denied/>}
+                {permission === '' ? null : permission === 'edit_employee_record' ? <EmployeeEditForm history={props.history}/>: <Denied/>}
             </div>
         </Fragment>
     )

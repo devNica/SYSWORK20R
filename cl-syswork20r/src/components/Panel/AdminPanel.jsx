@@ -58,7 +58,7 @@ const AdminPanel = (props) => {
                 <div className="dropdown-menu" aria-labelledby="staff-module-dropdown">
                 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_employee" to='/administration/viewemployeesrecords'>
-                    <DnsIcon  style={{ color: "#5094de"}} fontSize="medium"/> View Records
+                    <DnsIcon  style={{ color: "#5094de"}} fontSize="small"/> View Records
                 </Link>
 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_employee" to='/administration/addemployee'> 
@@ -78,7 +78,7 @@ const AdminPanel = (props) => {
                 <div className="dropdown-menu" aria-labelledby="person-module-dropdown">
                 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="view_person" to='/administration/viewpersonsrecords'>
-                    <DnsIcon  style={{ color: "#5094de"}} fontSize="medium"/> View Records
+                    <DnsIcon  style={{ color: "#5094de"}} fontSize="small"/> View Records
                 </Link>
                 
                 <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_person" to='/administration/addperson'> 
