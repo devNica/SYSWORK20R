@@ -62,7 +62,11 @@ const administrationModelController = {
 
     list_employees_records: data =>{
         return cnc(mysql, configuration, employee.list_employees_records(data))
-    }
+    },
+
+    get_employee_byID: data =>{
+        return cnc(mysql, configuration, employee.list_employees_records(data))
+    },
 }
 
 module.exports = administrationModelController;

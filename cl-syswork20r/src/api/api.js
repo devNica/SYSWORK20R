@@ -33,6 +33,8 @@ export default {
             axios.post('/api/administration/create_employee_record', data).then(res => res.data),
         view_employees_records: data =>
             axios.post('/api/administration/view_employees_records', {data}).then(res => res.data),
+        get_employee: data =>
+            axios.post('/api/administration/get_employee',{data}).then(res => res.data),
     },
 
     accounting:{

@@ -5,7 +5,8 @@ import {GET_LIST_DEGREES,
      GET_LOCATIONS_LIST, 
      GET_EMPLOYEE_NUMBER,
     CLEAR_PERSONS_RECORDS,
-    GET_EMPLOYEES_RECORDS} from './types';
+    GET_EMPLOYEES_RECORDS,
+    GET_EMPLOYEE_BY_IDEMPLOYEE} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -40,7 +41,6 @@ export const fn_list_persons_records = (data) => dispatch => {
 }
 
 export const fn_get_person_by_idperson = idperson => dispatch =>{
-    console.log('este es el id que ire a buscar', idperson)
     api.administration.get_person(idperson)
     .then(response=>{
         console.log(response)
@@ -139,4 +139,18 @@ export const fn_list_employees_records = data => dispatch =>{
         })
     })
     .catch(error => console.log(error))
+}
+
+export const fn_get_employee_byID = data => dispatch =>{
+    api.administration.get_employee(data)
+    .then(response=>{
+        console.log(response)
+        dispatch({
+            type: GET_EMPLOYEE_BY_IDEMPLOYEE,
+            payload:{
+                employee: response.employee
+            }
+        })
+    })
+    .catch(error=>console.log(error))
 }

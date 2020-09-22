@@ -85,4 +85,13 @@ router.post('/administration/view_employees_records', (req, res)=>{
 
 })
 
+
+router.post('/administration/get_employee', (req, res)=>{
+    //let idemployee = req.body.data.id
+    console.log(req.body.data)
+    administration.get_employee_byID(req.body.data).then(result=>{
+        res.status(200).json({flag: true, employee: result.rows})
+    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+})
+
 module.exports = router;

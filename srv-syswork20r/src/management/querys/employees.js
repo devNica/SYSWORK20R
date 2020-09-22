@@ -18,8 +18,10 @@ const queryEmployeeModel = {
         let query = `SELECT 
         EMP.idemployee, 
         EMP.emp_number, 
+        EMP.salary as qty,
         CONCAT(EMP.salary, ' ', CRR.currency) AS salary,
         EMP.fk_currency,
+        CRR.description as crr_description,
         CONCAT(P.first_name, ' ', P.last_name) AS person,
         P.idperson,
         PST.position,
