@@ -13,7 +13,7 @@ const mapStateToProps = (state)=>({
     currencies_fr: state.accounting.currencies
 })
 
-const EditEmployeeForm = (props)=>{
+const EmployeeEditForm = (props)=>{
 
     const {register, errors, handleSubmit} = useForm();
 
@@ -40,7 +40,7 @@ const EditEmployeeForm = (props)=>{
         setPermission(permission)
         setUserState(state)
         
-    },[employee_fr])
+    },[employee_fr, user_fr])
 
 
     const onStatusChange = (e) =>{
@@ -272,4 +272,4 @@ const EditEmployeeForm = (props)=>{
     )
 }
 
-export default connect(mapStateToProps,{})(EditEmployeeForm);
+export default connect(mapStateToProps,{})(EmployeeEditForm);

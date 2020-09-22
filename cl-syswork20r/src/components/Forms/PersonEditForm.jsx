@@ -12,7 +12,7 @@ const mapStateToProps = state =>({
     user_fr: state.auth.user,
 })
 
-const EditPersonForm = (props) =>{
+const PersonEditForm = (props) =>{
 
     const {register, errors, handleSubmit} = useForm();
     
@@ -286,4 +286,4 @@ const EditPersonForm = (props) =>{
 }
 
 
-export default connect(mapStateToProps,{fn_edit_person_record})(EditPersonForm);
+export default connect(mapStateToProps,{fn_edit_person_record})(PersonEditForm);

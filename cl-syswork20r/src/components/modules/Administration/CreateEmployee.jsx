@@ -30,7 +30,7 @@ const CreateEmployee = (props) =>{
         fn_get_locations_list({filter: 1})
         fn_get_employee_number()
 
-    },[user_fr, fn_list_persons_records, fn_get_list_currencies])
+    },[user_fr, fn_list_persons_records, fn_get_list_currencies, fn_get_jobs_list, fn_get_employee_number, fn_get_locations_list])
 
     const linkOptions = (
         <Fragment>

@@ -27,16 +27,12 @@ const Profile = ({user_fr}) =>{
 
     useEffect(()=>{
         downloadImage({idemployee: user_fr.fk_employee}).then(response=>{
-            console.log(response)
+            
             let imgStrs = arrayBufferToBase64(response.photo.data)
             let base64Flga=`data:image/png;base64,`
 
             if(response){
                 setImg(base64Flga+imgStrs)
-                // let image = 'data:image/png;base64,' +  Buffer.from(response.photo.data, 'binary').toString('base64')
-                // console.log(image)
-                // //let image = `data:image/png;base64,${response.photo}`
-                // setImg(image);
                 setStatusImg(true)
             }
             else{

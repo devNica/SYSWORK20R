@@ -115,8 +115,8 @@ export const fn_get_employee_number = () => dispatch =>{
 }
 
 export const fn_create_employee_record = data => dispatch =>{
-    api.administration.create_employee(data).
-    then(response =>{
+    api.administration.create_employee(data)
+    .then(response =>{
         console.log(response)
     })
     .catch(err=>console.log(err))

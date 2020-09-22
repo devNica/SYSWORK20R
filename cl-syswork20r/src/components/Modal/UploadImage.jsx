@@ -1,15 +1,10 @@
 import React, {useState } from 'react';
 import {uploadImage} from '../../api/api';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state =>({
-    employee_fr: state.employee
-})
 
 const UploadImage = (props) => {
 
     const [fileSelected, setFile] = useState('');
-    const {employee_fr, fk_employee} = props;
+    const {fk_employee} = props;
     
     const fileSelecttedHandler = e =>{
         let files = e.target.files;
@@ -107,4 +102,4 @@ const UploadImage = (props) => {
     
 }
 
-export default connect(mapStateToProps,{})(UploadImage);
+export default UploadImage;

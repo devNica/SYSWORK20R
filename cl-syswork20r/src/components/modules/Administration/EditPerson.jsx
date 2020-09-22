@@ -4,7 +4,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
 import {fn_get_person_by_idperson} from '../../../redux/actions/administration'
-import EditPersonForm from '../../Forms/EditPersonForm';
+import PersonEditForm from '../../Forms/PersonEditForm';
 import {fn_list_degrees} from '../../../redux/actions/administration'
 
 
@@ -16,15 +16,15 @@ const mapStateToProps = state => ({
 const EditPerson = (props) =>{
     
     const [permission, setPermission] = useState('')
-    const {user_fr, fn_get_person_by_idperson, fn_list_degrees} = props
+    const {user_fr, fn_get_person_by_idperson, fn_list_degrees, match} = props
 
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'edit_person_record')
         setPermission(permission)
         fn_list_degrees()
-        fn_get_person_by_idperson(props.match.params)
+        fn_get_person_by_idperson(match.params)
 
-    },[user_fr, fn_get_person_by_idperson, fn_list_degrees])
+    },[user_fr, fn_get_person_by_idperson, fn_list_degrees, match])
 
     const linkOptions = (
         <Fragment>
@@ -46,7 +46,7 @@ const EditPerson = (props) =>{
             </nav>
 
             <div id="content">
-                {permission === '' ? null : permission === 'edit_person_record' ? <EditPersonForm history={props.history}/>: <Denied/>}
+                {permission === '' ? null : permission === 'edit_person_record' ? <PersonEditForm history={props.history}/>: <Denied/>}
             </div>
         </Fragment>
     )

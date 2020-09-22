@@ -7,10 +7,10 @@ import Navbar from './components/navbar/Navbar';
 import HomePage from './components/pages/HomePage';
 import Profile from './components/user/Profile/Profile';
 import CreatePerson from './components/modules/Administration/CreatePerson';
-import ListPersonsRecords from './components/modules/Administration/ListPersonsRecords';
+import PersonsRecordsList from './components/modules/Administration/PersonsRecordsList';
 import EditPerson from './components/modules/Administration/EditPerson';
 import CreateEmployee from './components/modules/Administration/CreateEmployee';
-import ListEmployeesRecords from './components/modules/Administration/ListEmployeesRecords';
+import EmployeesRecordsList from './components/modules/Administration/EmployeesRecordsList';
 import EditEmployee from './components/modules/Administration/EditEmployee';
 
 const App = ({ location }) => {
@@ -22,8 +22,8 @@ const App = ({ location }) => {
         <PrivateRoute location={location} exact path='/profile' component={Profile} />
         <GuestRoute location={location} exact path='/signin' component={Signin} />
         <PrivateRoute location={location} exact path='/administration/addperson' component={CreatePerson}/>
-        <PrivateRoute location={location} exact path='/administration/viewpersonsrecords' component={ListPersonsRecords}/>
-        <PrivateRoute location={location} exact path='/administration/viewemployeesrecords' component={ListEmployeesRecords}/>
+        <PrivateRoute location={location} exact path='/administration/viewpersonsrecords' component={PersonsRecordsList}/>
+        <PrivateRoute location={location} exact path='/administration/viewemployeesrecords' component={EmployeesRecordsList}/>
         <PrivateRoute location={location} exact path='/administration/editperson/:id' component={EditPerson} />
         <PrivateRoute location={location} exact path='/administration/addemployee' component={CreateEmployee}/>
         <PrivateRoute location={location} exact path='/administration/editemployee/:id' component={EditEmployee} />

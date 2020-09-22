@@ -10,7 +10,7 @@ const mapStateToProps = (state) =>({
     user_fr: state.auth.user,
 })
 
-const ListEmployessRecords = (props)=> {
+const EmployeesRecordsList = (props)=> {
 
     const [permission, setPermission] = useState('')
     const {user_fr, fn_list_employees_records} = props;
@@ -60,4 +60,4 @@ const ListEmployessRecords = (props)=> {
 
 }
 
-export default connect(mapStateToProps,{fn_list_employees_records})(ListEmployessRecords);
+export default connect(mapStateToProps,{fn_list_employees_records})(EmployeesRecordsList);

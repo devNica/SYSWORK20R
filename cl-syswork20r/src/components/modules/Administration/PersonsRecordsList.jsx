@@ -10,7 +10,7 @@ const mapStateToProps = (state) =>({
     user_fr: state.auth.user,
 })
 
-const ListPersonsRecords = (props)=> {
+const PersonsRecordsList = (props)=> {
 
     const [permission, setPermission] = useState('')
     const {user_fr, fn_list_persons_records, fn_clear_persons_records} = props;
@@ -25,7 +25,7 @@ const ListPersonsRecords = (props)=> {
             fn_clear_persons_records();
         }
 
-    },[user_fr, fn_list_persons_records])
+    },[user_fr, fn_list_persons_records, fn_clear_persons_records])
 
 
     const linkOptions = (
@@ -63,4 +63,4 @@ const ListPersonsRecords = (props)=> {
 
 }
 
-export default connect(mapStateToProps,{fn_list_persons_records, fn_clear_persons_records})(ListPersonsRecords);
+export default connect(mapStateToProps,{fn_list_persons_records, fn_clear_persons_records})(PersonsRecordsList);
