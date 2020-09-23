@@ -30,6 +30,11 @@ router.post('/user/signin', (req, res) => {
         if(user.rows[0]) {
             if (bcrypt.compareSync(data.password, user.rows[0].password)) {
                 
+                req.session.isLogged = true
+                req.session.username = user.rows[0].username
+
+                console.log(req.session)
+
                 let token = jwt.sign({ data: `${user.rows[0].username}`}, SECURITY_KEY, { expiresIn: 1800 });
                 let permissions = user.rows[0].permissions.split(',')
                 let modules = user.rows[0].modules.split(',')
