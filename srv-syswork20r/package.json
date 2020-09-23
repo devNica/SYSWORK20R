@@ -18,6 +18,8 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.0",
     "express-handlebars": "^3.1.0",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
     "fs-extra": "^8.1.0",
     "handlebars": "^4.7.6",
     "jsonwebtoken": "^8.5.1",

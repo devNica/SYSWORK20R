@@ -1,17 +1,38 @@
-var express = require("express");
-var bodyparser = require("body-parser");
-var cors = require("cors");
-var fileupload = require('express-fileupload');
+let express = require("express");
+let bodyparser = require("body-parser");
+let cors = require("cors");
+let fileupload = require('express-fileupload');
+require('dotenv').config();
+let session = require('express-session');
+let MysqlStore = require('express-mysql-session')(session)
 
-var app = express();
-var port = process.env.PORT || 4800;
+
+let app = express();
+let port = process.env.PORT || 4800;
+let conn = {
+    host : process.env.HOST,
+    port: 3306,
+    user : process.env.NAME,
+    password : process.env.PASSWORD,
+    database : process.env.DATABASE,
+    
+}
+
+let sessionStore = new MysqlStore(conn)
+
 
 //MIDDLEWARES
 app.use(fileupload());
 app.use(bodyparser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(session({
+	key: 'session_cookie_name',
+	secret: 'session_cookie_secret',
+	store: sessionStore,
+	resave: false,
+	saveUninitialized: false
+}));
 
 //ENRUTADORES
 let userRouter = require('./routes/users');
