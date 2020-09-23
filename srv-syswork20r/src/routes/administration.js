@@ -1,5 +1,6 @@
 let router = require('express').Router();
 let administration = require('../management/administration');
+const employee = require('../models/employee.model');
 
 
 router.get('/administration/list_degrees', (req, res)=>{
@@ -51,47 +52,12 @@ router.post('/administration/locations_list', (req, res)=>{
     }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 })
 
+router.get('/administration/get_employee_number', employee.fetchEmployeeNumber)
 
-router.get('/administration/get_employee_number', (req, res)=>{
-    administration.suggest_employee_number().then(result=>{
-        res.status(200).json({flag: true, data: result.rows[0]})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/create_employee_record', employee.create);
 
-router.post('/administration/create_employee_record', (req, res)=>{
-    let data = {
-        emp_number: req.body.emp_number,
-        salary: req.body.salary,
-        currency: req.body.currency,
-        fk_person: req.body.fk_person,
-        fk_position: req.body.fk_position,
-        fk_location: req.body.fk_location,
-        created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
-        updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
-    }
+router.post('/administration/view_employees_records', employee.findAll)
 
-    administration.create_employee_record(data).then(result=>{
-        res.status(200).json({flag: true, msg: 'The record was created successfully'})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-  
-})
-
-router.post('/administration/view_employees_records', (req, res)=>{
-    let filter = req.body.data
-    administration.list_employees_records(filter)
-    .then(result=>{
-        res.status(200).json({flag: true, employees: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-
-})
-
-
-router.post('/administration/get_employee', (req, res)=>{
-    //let idemployee = req.body.data.id
-    console.log(req.body.data)
-    administration.get_employee_byID(req.body.data).then(result=>{
-        res.status(200).json({flag: true, employee: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/get_employee', employee.findById)
 
 module.exports = router;

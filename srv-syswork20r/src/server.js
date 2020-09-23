@@ -27,11 +27,11 @@ app.use(bodyparser.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
-	key: 'session_cookie_name',
-	secret: 'session_cookie_secret',
+	key: '5y5w0Rk20r',
+	secret: 'ssk-27022017868451',
 	store: sessionStore,
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: true
 }));
 
 //ENRUTADORES
