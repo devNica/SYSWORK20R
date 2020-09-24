@@ -10,8 +10,9 @@ const mapStateToProps = state => ({
     user_fr: state.auth.user,
 })
 
-const CreatePerson = ({user_fr, fn_list_degrees}) =>{
+const CreatePerson = (props) =>{
     
+    const {user_fr, fn_list_degrees} = props;
     const [permission, setPermission] = useState('')
     
     useEffect(()=>{

@@ -29,12 +29,19 @@ export default {
             axios.post('/api/administration/view/locations', {data}).then(res => res.data),
         get_employee_numer: data =>
             axios.get('/api/administration/fetch/employee-number').then(res => res.data),
-        create_employee: data =>
+        
+        
+    },
+
+    employee:{
+        create: data =>
             axios.post('/api/administration/create/employee', data).then(res => res.data),
-        view_employees_records: data =>
+        findAll: data =>
             axios.post('/api/administration/view/employees', {data}).then(res => res.data),
-        get_employee: data =>
+        findOne: data =>
             axios.post('/api/administration/search/employee',{data}).then(res => res.data),
+        update: data =>
+        axios.post('/api/administration/update/employee',{data}).then(res => res.data),
     },
 
     accounting:{

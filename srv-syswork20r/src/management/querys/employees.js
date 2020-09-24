@@ -73,6 +73,20 @@ const queryEmployeeModel = {
             NULL)`
         return query
     },
+
+    update: (data)=>{
+        return `CALL SP_UPDATE_EMPLOYEE(
+            ${data.idemployee}, 
+            ${data.salary},
+            ${data.fk_currency},
+            ${data.fk_position},
+            ${data.fk_location},
+            ${data.is_active},
+            ${data.is_user},
+            '${data.updated_at}'
+        )`
+        
+    }
     
 } 
 

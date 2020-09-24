@@ -1,12 +1,13 @@
 import {GET_LIST_DEGREES, 
-    GET_PERSONS_RECORDS, 
-    GET_PERSON_BY_IDPERSON, 
-    GET_JOBS_LIST, 
-    GET_LOCATIONS_LIST,
-    GET_EMPLOYEE_NUMBER,
+GET_PERSONS_RECORDS, 
+GET_PERSON_BY_IDPERSON, 
+GET_JOBS_LIST, 
+GET_LOCATIONS_LIST,
+GET_EMPLOYEE_NUMBER,
 CLEAR_PERSONS_RECORDS, 
 GET_EMPLOYEES_RECORDS,
-GET_EMPLOYEE_BY_IDEMPLOYEE} from '../actions/types';
+GET_EMPLOYEE_BY_IDEMPLOYEE,
+CLEAR_EMPLOYEE_RECORD} from '../actions/types';
 
 const initialState = {
    degrees: [],
@@ -61,6 +62,13 @@ export default function (state = initialState, action){
                 ...state,
                 persons: []
             }
+        
+        case CLEAR_EMPLOYEE_RECORD:
+            return{
+                ...state,
+                employee: []
+            }
+        
         case GET_EMPLOYEES_RECORDS:
             return {
                 ...state,

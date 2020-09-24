@@ -4,7 +4,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
 import EmployeeEditForm from '../../Forms/EmployeeEditForm';
-import {fn_get_employee_byID, fn_get_jobs_list, fn_get_locations_list} from '../../../redux/actions/administration'
+import {fn_get_employee_byID, fn_get_jobs_list, fn_get_locations_list, fn_clear_employee_record} from '../../../redux/actions/administration'
 import {fn_get_list_currencies} from '../../../redux/actions/accounting';
 
 
@@ -16,7 +16,7 @@ const EditEmployee = (props) =>{
     
     const [permission, setPermission] = useState('')
     const {user_fr, fn_get_employee_byID, match, fn_get_list_currencies, fn_get_locations_list, fn_get_jobs_list} = props
-
+    const {fn_clear_employee_record} = props;
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'edit_employee_record')
         setPermission(permission)
@@ -24,6 +24,10 @@ const EditEmployee = (props) =>{
         fn_get_list_currencies({filter: 1})
         fn_get_jobs_list({filter: 1})
         fn_get_locations_list({filter: 1})
+
+        return()=>{
+            fn_clear_employee_record();
+        }
 
     },[user_fr, fn_get_employee_byID, fn_get_list_currencies, fn_get_jobs_list, fn_get_locations_list, match])
 
@@ -61,4 +65,9 @@ const EditEmployee = (props) =>{
 }
 
 
-export default connect(mapStateToProps,{fn_get_employee_byID, fn_get_list_currencies, fn_get_jobs_list, fn_get_locations_list})(EditEmployee);
+export default connect(mapStateToProps,
+        {fn_get_employee_byID, 
+            fn_get_list_currencies, 
+                fn_get_jobs_list, 
+                    fn_get_locations_list,
+                        fn_clear_employee_record})(EditEmployee);

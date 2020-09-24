@@ -29,4 +29,6 @@ router.post('/administration/view/employees', employee.findAll);
 
 router.post('/administration/search/employee', employee.findById);
 
+router.post('/administration/update/employee', employee.update);
+
 module.exports = router;
