@@ -1,63 +1,32 @@
 let router = require('express').Router();
 let administration = require('../management/administration');
 const employee = require('../models/employee.model');
+const person = require('../models/person.model');
+const position = require('../models/position.model');
+const location = require('../models/location.model');
+const degree = require('../models/degree.model');
 
 
-router.get('/administration/list_degrees', (req, res)=>{
-    administration.list_degrees().then(result=>{
-        res.status(200).json({flag: true, degrees: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.get('/administration/view/degrees', degree.findAll);
 
-router.post('/administration/create_person_record', (req, res)=>{
+router.post('/administration/create/person', person.create);
 
-    administration.create_person_record(req.body.data).then(result=>{
-        res.status(201).json({flag: true, msg: `The record was created successfully`})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/view/persons', person.findAll);
 
-router.post('/administration/view_persons_records', (req, res)=>{
-    let filter = req.body.data
-    administration.list_persons_records(filter).then(result=>{
-        res.status(200).json({flag: true, persons: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/search/person', person.findById);
 
-router.post('/administration/get_person', (req, res)=>{
-    let idperson = req.body.data.id
-    administration.get_person_by_idperson(idperson).then(result=>{
-        res.status(200).json({flag: true, person: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/update/person', person.update);
 
-router.post('/administration/edit_person_record', (req, res)=>{
-    let data=req.body.data;
-    administration.edit_person_record(data).then(result=>{
-        res.status(200).json({flag: true, msg: 'The record was edited successfully'})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+router.post('/administration/view/positions', position.findAll);
 
-})
+router.post('/administration/view/locations', location.findAll);
 
-router.post('/administration/jobs_list', (req, res)=>{
-    let filter = req.body.data;
-    administration.get_jobs_list(filter).then(result=>{
-        res.status(200).json({flag: true, positions: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.get('/administration/fetch/employee-number', employee.fetchEmployeeNumber);
 
-router.post('/administration/locations_list', (req, res)=>{
-    let filter = req.body.data;
-    administration.get_list_locations(filter).then(result=>{
-        res.status(200).json({flag: true, locations: result.rows})
-    }).catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
-})
+router.post('/administration/create/employee', employee.create);
 
-router.get('/administration/get_employee_number', employee.fetchEmployeeNumber)
+router.post('/administration/view/employees', employee.findAll);
 
-router.post('/administration/create_employee_record', employee.create);
-
-router.post('/administration/view_employees_records', employee.findAll)
-
-router.post('/administration/get_employee', employee.findById)
+router.post('/administration/search/employee', employee.findById);
 
 module.exports = router;

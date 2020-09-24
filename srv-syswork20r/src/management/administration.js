@@ -7,7 +7,7 @@ var {degrees, position, location} = require('./querys/administration');
 
 let configuration = {
     host: config.db.host,
-    user: config.db.username,
+    user: config.db.user,
     password: config.db.password,
     database: config.db.database,
     multipleStatements: true,

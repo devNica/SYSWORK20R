@@ -80,7 +80,6 @@ export const fn_get_jobs_list = data => dispatch => {
             payload:{
                 positions: info
             }
-           
         })
     })
     .catch(error => console.log(error))
@@ -90,6 +89,7 @@ export const fn_get_jobs_list = data => dispatch => {
 export const fn_get_locations_list = data => dispatch => {
     api.administration.get_locations_list(data)
     .then(response => {
+        
         let info = models.locations(response.locations)
         dispatch({
             type: GET_LOCATIONS_LIST,

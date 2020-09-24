@@ -25,7 +25,7 @@ const CreateEmployee = (props) =>{
         setPermission(permission)
 
         fn_list_persons_records({filter: `P.is_active = 1 AND P.is_staff = 1 AND EMP.idemployee IS NULL`})
-        fn_get_jobs_list({filter: 1})
+        fn_get_jobs_list({filter: `1`})
         fn_get_list_currencies({filter: 1})
         fn_get_locations_list({filter: 1})
         fn_get_employee_number()
