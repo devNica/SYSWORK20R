@@ -9,7 +9,6 @@ const Degree = (data)=>{
 }
 
 Degree.findAll = (req, res)=>{
-    let filter = req.body.data
     cnc(mysql, config.db, query.degrees.list_degrees)
     .then(result => { res.status(200).json({msg: true, degrees: result.rows})})
     .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
