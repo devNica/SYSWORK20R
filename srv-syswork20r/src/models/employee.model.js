@@ -18,15 +18,6 @@ const Employee = (data)=>{
     this.photo = data.photo;
 }
 
-let configuration = {
-    host: config.db.host,
-    user: config.db.username,
-    password: config.db.password,
-    database: config.db.database,
-    multipleStatements: true,
-    timezone: "+06:00"
-}
-
 Employee.create = (req, res)=>{
     
     let data = {
@@ -40,7 +31,7 @@ Employee.create = (req, res)=>{
         updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     }
 
-    cnc(mysql, configuration, query.create_employee_record(data))
+    cnc(mysql, config.db, query.create_employee_record(data))
     .then(result => {
         res.status(200).json({flag: true, msg: 'The record was created successfully'})
     })
@@ -48,7 +39,7 @@ Employee.create = (req, res)=>{
 }
 
 Employee.findAll = (req, res)=>{
-    cnc(mysql, configuration, query.list_employees_records({filter: 1}))
+    cnc(mysql, config.db, query.list_employees_records({filter: 1}))
     .then(result=>{
         res.status(200).json({flag: true, employees: result.rows})
     })
@@ -56,7 +47,7 @@ Employee.findAll = (req, res)=>{
 }
 
 Employee.findById = (req, res) =>{
-    cnc(mysql, configuration, query.list_employees_records(req.body.data))
+    cnc(mysql, config.db, query.list_employees_records(req.body.data))
     .then(result=>{
         res.status(200).json({flag: true, employee: result.rows})
     })
@@ -64,10 +55,17 @@ Employee.findById = (req, res) =>{
 }
 
 Employee.fetchEmployeeNumber = (req, res)=>{
-    cnc(mysql, configuration, query.sf_suggest_employee_number)
+    cnc(mysql, config.db, query.sf_suggest_employee_number)
     .then(result=>{
         res.status(200).json({flag: true, data: result.rows[0]})
     })
+    .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+}
+
+Employee.downloadImage = (req, res)=>{
+    let data={filter: req.body.idemployee}
+    cnc(mysql, config.db, query.download_image(data))
+    .then(result=>{ res.status(200).json({flag: true, photo: result.rows[0].photo}) })
     .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 }
 
