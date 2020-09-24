@@ -3,7 +3,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import SaveIcon from '@material-ui/icons/Save';
 import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux';
-import PersonSearchForm from '../Modal/PersonSearchForm';
 import LocationSearchForm from '../Modal/LocationSearchForm';
 import PositionSearchForm from '../Modal/PositionSearchForm';
 
@@ -24,6 +23,7 @@ const EmployeeEditForm = (props)=>{
     const [currency, setCurrency] = useState(0);
     const [location, setLocation] = useState(0);
     const [position, setPosition] = useState(0);
+    const [salary, setSalary] = useState(0);
     
     useEffect(()=>{
         let currency = employee_fr !== undefined ? employee_fr.fk_currency : 0
@@ -52,10 +52,6 @@ const EmployeeEditForm = (props)=>{
         setUserState(!e.target.value)
     }
 
-    const getPerson = (data) =>{
-
-    }
-
     const getPosition = (data) => {
         setPosition(data)
     }
@@ -64,8 +60,13 @@ const EmployeeEditForm = (props)=>{
         setLocation(data)
     }
 
-    const onsubmit = (data, e)=>{
+    const handleOnChange = (e)=>{
+        console.log(`${e.target.name}:${e.target.value}`)
+        if(e.target.name = 'salary') setSalary(e.target.value)
+    }
 
+    const onsubmit = (data, e)=>{
+        console.log(data);
     }
 
     const currenciesList = currencies_fr.map((e, i)=>(
@@ -120,13 +121,45 @@ const EmployeeEditForm = (props)=>{
                         <div className="row">
                             <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                 <div className="form-group">
+                                    <label htmlFor="salary">DNI EMPLOYEE:</label>
+                                    <input 
+                                        type="text"
+                                        id="emp_number"
+                                        name="emp_number"
+                                        readOnly
+                                        className="form-control mx-2 font-weight-bold h5"
+                                        defaultValue = { employee_fr !== undefined ? employee_fr.emp_number : null}
+                                       
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <div className="form-group">
+                                    <label htmlFor="salary">Employee:</label>
+                                    <input 
+                                        type="text"
+                                        id="person"
+                                        name="person"
+                                        readOnly
+                                        className="form-control mx-2 font-weight-bold h5"
+                                        defaultValue = { employee_fr !== undefined ? employee_fr.person : null}
+                                       
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <div className="form-group">
                                     <label htmlFor="salary">Salary:</label>
                                     <input 
                                         type="number"
                                         id="salary"
                                         name="salary"
                                         className="form-control mx-2 font-weight-bold h5"
-                                        value = { employee_fr !== undefined ? employee_fr.qty : null}
+                                        value = { salary === 0 ? employee_fr !== undefined ? employee_fr.qty : 0.00 : salary}
+                                        onChange={handleOnChange}
                                         ref={
                                             register({
                                                 required: {value: true, message: 'the salary of the employee is required'}
@@ -143,7 +176,7 @@ const EmployeeEditForm = (props)=>{
                                         id="currency"
                                         name="currency"
                                         className="form-control mx-2 font-weight-bold h5"
-                                        value = {currency}
+                                        defaultValue = {currency}
                                         ref={
                                             register({
                                                 required: {value: true, message: 'please select a currency type'}
@@ -171,7 +204,7 @@ const EmployeeEditForm = (props)=>{
                                             id="location"
                                             name="location"
                                             readOnly="readonly"
-                                            value = {location.location}
+                                            defaultValue = {location.location}
                                             placeholder="*click on the magnifying glass please"
                                             ref={
                                                 register({
@@ -207,7 +240,7 @@ const EmployeeEditForm = (props)=>{
                                             id="position"
                                             name="position"
                                             readOnly="readonly"
-                                            value={position.position}
+                                            defaultValue={position.position}
                                             placeholder="*click on the magnifying glass please"
                                             ref={
                                                 register({
@@ -239,8 +272,8 @@ const EmployeeEditForm = (props)=>{
                                         className="form-check-input" 
                                         type="checkbox" 
                                         name="userState" 
-                                        value={userState}
-                                        
+                                        defaultValue={userState}
+                                        disabled={true}
                                         checked={userState==="1"}
                                         onChange={onValueChange}
                                        
@@ -263,7 +296,6 @@ const EmployeeEditForm = (props)=>{
                 </div>
             </div>
 
-            <PersonSearchForm fetchData={getPerson}/>
             <PositionSearchForm fetchData={getPosition}/>
             <LocationSearchForm fetchData={getLocation}/>
 

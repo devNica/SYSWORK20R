@@ -1,21 +1,19 @@
 import {GET_LIST_DEGREES,
-     GET_PERSONS_RECORDS, 
-     GET_PERSON_BY_IDPERSON, 
-     GET_JOBS_LIST, 
-     GET_LOCATIONS_LIST, 
-     GET_EMPLOYEE_NUMBER,
-    CLEAR_PERSONS_RECORDS,
-    GET_EMPLOYEES_RECORDS,
-    GET_EMPLOYEE_BY_IDEMPLOYEE} from './types';
+GET_PERSONS_RECORDS, 
+GET_PERSON_BY_IDPERSON, 
+GET_JOBS_LIST, 
+GET_LOCATIONS_LIST, 
+GET_EMPLOYEE_NUMBER,
+CLEAR_PERSONS_RECORDS,
+GET_EMPLOYEES_RECORDS,
+GET_EMPLOYEE_BY_IDEMPLOYEE,
+CLEAR_EMPLOYEE_RECORD} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
 export const fn_list_degrees = () => dispatch =>{
     api.administration.listDegrees()
     .then(response=>{
-
-        console.log(response)
-
         dispatch({
             type: GET_LIST_DEGREES,
             payload: {
@@ -43,7 +41,6 @@ export const fn_list_persons_records = (data) => dispatch => {
 export const fn_get_person_by_idperson = idperson => dispatch =>{
     api.administration.get_person(idperson)
     .then(response=>{
-        console.log(response)
         dispatch({
             type: GET_PERSON_BY_IDPERSON,
             payload:{
@@ -63,7 +60,6 @@ export const fn_create_person_record = data => dispatch =>{
 }
 
 export const fn_edit_person_record = (data) => dispatch =>{
-
     api.administration.edit_person_record(data)
     .then(response =>{
        console.log(response)
@@ -89,7 +85,6 @@ export const fn_get_jobs_list = data => dispatch => {
 export const fn_get_locations_list = data => dispatch => {
     api.administration.get_locations_list(data)
     .then(response => {
-        
         let info = models.locations(response.locations)
         dispatch({
             type: GET_LOCATIONS_LIST,
@@ -115,22 +110,15 @@ export const fn_get_employee_number = () => dispatch =>{
 }
 
 export const fn_create_employee_record = data => dispatch =>{
-    api.administration.create_employee(data)
+    api.employee.create(data)
     .then(response =>{
         console.log(response)
     })
     .catch(err=>console.log(err))
 }
 
-export const  fn_clear_persons_records = () => dispatch =>{
-    dispatch({
-        type: CLEAR_PERSONS_RECORDS,
-    })
-}
-
-
 export const fn_list_employees_records = data => dispatch =>{
-    api.administration.view_employees_records(data)
+    api.employee.findAll(data)
     .then(response =>{
         let info = models.employees(response.employees)
         dispatch({
@@ -142,9 +130,8 @@ export const fn_list_employees_records = data => dispatch =>{
 }
 
 export const fn_get_employee_byID = data => dispatch =>{
-    api.administration.get_employee(data)
+    api.employee.findOne(data)
     .then(response=>{
-        console.log(response)
         dispatch({
             type: GET_EMPLOYEE_BY_IDEMPLOYEE,
             payload:{
@@ -153,4 +140,25 @@ export const fn_get_employee_byID = data => dispatch =>{
         })
     })
     .catch(error=>console.log(error))
+}
+
+export const fn_update_employee = data => dispatch =>{
+    api.employee.update(data)
+    .then(response=>{
+        console.log(response)
+    })
+    .catch(error=>console.log(error))
+}
+
+
+export const  fn_clear_persons_records = () => dispatch =>{
+    dispatch({
+        type: CLEAR_PERSONS_RECORDS,
+    })
+}
+
+export const fn_clear_employee_record = () => dispatch =>{
+    dispatch({
+        type: CLEAR_EMPLOYEE_RECORD
+    })
 }

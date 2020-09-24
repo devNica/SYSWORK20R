@@ -69,5 +69,22 @@ Employee.downloadImage = (req, res)=>{
     .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 }
 
+Employee.update = (req, res) =>{
+    let data = {
+        idemployee: req.body.idemployee,
+        salary: req.body.salary,
+        currency: req.body.currency,
+        fk_position: req.body.fk_position,
+        fk_location: req.body.fk_location,
+        is_active: req.body.is_active,
+        is_user: req.body.is_user,
+        updated_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
+    }
+
+    cnc(mysql, config.db, query.update(data))
+    .then(resutl => {res.status(201).json({flag: true, msg: `The recorda has been updated`})})
+    .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
+}
+
 
 module.exports = Employee;
