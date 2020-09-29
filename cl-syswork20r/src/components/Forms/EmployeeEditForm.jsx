@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form'
 import {connect} from 'react-redux';
 import LocationSearchForm from '../Modal/LocationSearchForm';
 import PositionSearchForm from '../Modal/PositionSearchForm';
+import {fn_update_employee} from '../../redux/actions/administration';
 
 const mapStateToProps = (state)=>({
     user_fr: state.auth.user,
@@ -16,7 +17,7 @@ const EmployeeEditForm = (props)=>{
 
     const {register, errors, handleSubmit} = useForm();
 
-    const {employee_fr, currencies_fr, user_fr} = props;
+    const {employee_fr, currencies_fr, user_fr, fn_update_employee, history} = props;
     const [userState, setUserState] = useState(0);
     const [employeeState, setEmployeeState] = useState(0);
     const [permission, setPermission] = useState('')
@@ -27,15 +28,15 @@ const EmployeeEditForm = (props)=>{
     
     useEffect(()=>{
         let currency = employee_fr !== undefined ? employee_fr.fk_currency : 0
-        let location = employee_fr !== undefined ? employee_fr.location : ''
-        let position = employee_fr !== undefined ? employee_fr.position : ''
+        let location = employee_fr !== undefined ? {idlocation: employee_fr.idlocation, location: employee_fr.location, depends_on: ''} : ''
+        let position = employee_fr !== undefined ? {idposition: employee_fr.idposition, position: employee_fr.position, is_active: "ACTIVE"} : ''
         let status = employee_fr !== undefined ? employee_fr.is_active ? "1" : "0" : null
         let state = employee_fr !== undefined ? employee_fr.is_user ? "1" : "0" : null
         let permission = user_fr.permissions.find(element => element === 'status_employee_record')
        
         setCurrency(currency)
-        setLocation({location})
-        setPosition({position: position})
+        setLocation(location)
+        setPosition(position)
         setEmployeeState(status)
         setPermission(permission)
         setUserState(state)
@@ -62,11 +63,26 @@ const EmployeeEditForm = (props)=>{
 
     const handleOnChange = (e)=>{
         console.log(`${e.target.name}:${e.target.value}`)
-        if(e.target.name = 'salary') setSalary(e.target.value)
+        if(e.target.name === 'salary') setSalary(e.target.value)
+        if(e.target.name === 'fk_currency') setCurrency(e.target.value)
     }
 
     const onsubmit = (data, e)=>{
         console.log(data);
+        data.salary = parseFloat(data.salary)
+        data.fk_location = location.idlocation
+        data.fk_position = position.idposition
+        data.fk_currency = parseInt(data.fk_currency)
+        data.is_active = parseInt(data.is_active)
+        data.is_user = employee_fr.is_user
+        data.idemployee = employee_fr.idemployee
+        
+        fn_update_employee(data);
+
+        setTimeout(() => {
+            history.push('/administration/viewemployeesrecords')
+        }, 350);
+
     }
 
     const currenciesList = currencies_fr.map((e, i)=>(
@@ -79,7 +95,7 @@ const EmployeeEditForm = (props)=>{
                 <input 
                     className="form-check-input" 
                     type="radio" 
-                    name="active" 
+                    name="is_active" 
                     defaultValue="1"
                     
                     checked={employeeState==="1"}
@@ -96,7 +112,7 @@ const EmployeeEditForm = (props)=>{
                 <input 
                     className="form-check-input" 
                     type="radio" 
-                    name="active" 
+                    name="is_active" 
                     defaultValue="0"
                     checked={employeeState==="0"}
                     onChange={onStatusChange}
@@ -170,20 +186,21 @@ const EmployeeEditForm = (props)=>{
                             </div>
                             <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                                 <div className="form-group">
-                                    <label htmlFor="currency">Currency:</label>
+                                    <label htmlFor="fk_currency">Currency:</label>
                                     <select 
-                                        type="currency"
-                                        id="currency"
-                                        name="currency"
+                                        type="number"
+                                        id="fk_currency"
+                                        name="fk_currency"
                                         className="form-control mx-2 font-weight-bold h5"
-                                        defaultValue = {currency}
+                                        value = {currency}
+                                        onChange={handleOnChange}
                                         ref={
                                             register({
-                                                required: {value: true, message: 'please select a currency type'}
+                                                required: 'Please select one of the options'
                                             })
                                         }
                                     >
-                                        <option value="0">SELECT AN OPTION</option>
+                                        
                                         {currenciesList}
                                     </select>
                                 </div>
@@ -304,4 +321,4 @@ const EmployeeEditForm = (props)=>{
     )
 }
 
-export default connect(mapStateToProps,{})(EmployeeEditForm);
+export default connect(mapStateToProps,{fn_update_employee})(EmployeeEditForm);
