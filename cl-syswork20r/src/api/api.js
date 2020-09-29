@@ -41,7 +41,7 @@ export default {
         findOne: data =>
             axios.post('/api/administration/search/employee',{data}).then(res => res.data),
         update: data =>
-        axios.post('/api/administration/update/employee',{data}).then(res => res.data),
+        axios.post('/api/administration/update/employee',data).then(res => res.data),
     },
 
     accounting:{

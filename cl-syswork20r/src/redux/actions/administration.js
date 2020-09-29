@@ -145,7 +145,7 @@ export const fn_get_employee_byID = data => dispatch =>{
 export const fn_update_employee = data => dispatch =>{
     api.employee.update(data)
     .then(response=>{
-        console.log(response)
+        
     })
     .catch(error=>console.log(error))
 }
