@@ -15,7 +15,7 @@ const Base = ()=>{
 
     
     return (
-        <BrowserRouter basename='/onsupport'>
+        <BrowserRouter basename='/syswork20r'>
             <Provider store={store}>
                 <ReactNotifications />
                 <Route component={App} />

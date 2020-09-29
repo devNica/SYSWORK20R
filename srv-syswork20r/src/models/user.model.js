@@ -5,6 +5,7 @@ let mysql = require('mysql2/promise');
 
 let bcrypt = require('bcrypt')
 const jwt = require("jsonwebtoken");
+const { user } = require('../management/querys/users');
 
 const SECURITY_KEY = process.env.SECURITY_KEY;
 
@@ -64,6 +65,14 @@ User.findOne = (req, res)=>{
     .catch(err=>{
         res.status(200).json({error: err})
     })
+}
+
+User.findAll = (req, res)=>{
+    cnc(mysql, config.db, query.user.get_users(req.body.filter))
+    .then(result=>{
+        res.status(200).json({msg: true, users: result.rows})
+    })
+    .catch(error => res.status(200).json({flag: false, msg: `the query could not be processed`, error: error}))
 }
 
 

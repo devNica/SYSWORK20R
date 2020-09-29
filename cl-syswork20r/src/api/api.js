@@ -10,6 +10,8 @@ export default {
             axios.post('/api/user/confirmation', { token }).then(res => res.data),
         verifyPermission: data =>
             axios.post('/api/user/verify_permission', {data}).then(res => res.data),
+        findAll: data =>
+            axios.post('/api/user/view/users', data).then(res => res.data),
     },
 
     administration:{
