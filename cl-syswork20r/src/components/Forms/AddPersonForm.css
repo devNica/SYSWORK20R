@@ -20,6 +20,11 @@
     color: rgba(231, 231, 240, 0.952);
 }
 
+.color-button-edit-user{
+    background: #af0b26 linear-gradient(270deg, #af1d66, #bb1483) repeat-x;
+    color: rgba(231, 231, 240, 0.952);
+}
+
 .color-button-modal{
     background: #355f9e linear-gradient(180deg, #3840a8, #355f9e) repeat-x;
 }

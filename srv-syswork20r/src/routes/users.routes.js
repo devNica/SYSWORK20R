@@ -8,5 +8,7 @@ router.post('/user/upload/image', user.uplodadImage)
 
 router.post('/user/download/image', employee.downloadImage)
 
+router.post('/user/view/users', user.findAll)
+
 module.exports = router;
 

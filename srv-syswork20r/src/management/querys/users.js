@@ -28,6 +28,20 @@ const queryUserModel={
             WHERE usr.username = '${data.username}'`
         },
 
+        get_users: (data)=>{
+            return `SELECT 
+            
+            usr.iduser,
+            usr.username,
+            usr.password,
+            usr.token,
+            usr.is_active,
+            IF(usr.is_active = 1, 'ACTIVE', 'INACTIVE') AS state
+            FROM user as usr
+            WHERE ${data}`
+            
+        },
+
         createUser: (data)=>{
             return `INSERT INTO user (iduser, username, password, token, is_active, fk_employee, created_at, updated_at) VALUES 
             (NULL, '${data.name}', '${data.password}', '${data.token}', '1', '${data.fk_employee}', '${data.created_at}', '${data.updated_at}')`

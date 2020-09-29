@@ -32,14 +32,15 @@ const AdminPanel = (props) => {
             <AccountBoxIcon  style={{ color: "#5094de"}} fontSize="small"/> Users
             </button>
             <div className="dropdown-menu" aria-labelledby="user-module-dropdown">
-            <button className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_user" onClick={handleOnClick}> 
-                <PersonAddIcon  style={{ color: "#5094de"}} fontSize="small"/> Add User
-            </button>
             
-            <button className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_user" onClick={handleOnClick}>
-                <EditIcon  style={{ color: "#5094de"}} fontSize="small"/> Edit User
-            </button>
-
+            <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="edit_user" to='/administration/viewusersaccounts'>
+                <DnsIcon  style={{ color: "#5094de"}} fontSize="small"/> View Accounts
+            </Link>
+            
+            <Link className="list-group-item list-group-item-action sub-item-option h5 text-dark" name="create_user" to='/administration/adduseraccount'> 
+                <PersonAddIcon  style={{ color: "#5094de"}} fontSize="small"/> Add User
+            </Link>
+            
             </div>
         </div>
        
