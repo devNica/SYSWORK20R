@@ -35,6 +35,11 @@ export default {
         
     },
 
+    userAccounts:{
+        requestAccountData: data =>
+            axios.post('/api/useraccounts/fetch/account-info',{data}).then(res => res.data),
+    },
+
     employee:{
         create: data =>
             axios.post('/api/administration/create/employee', data).then(res => res.data),

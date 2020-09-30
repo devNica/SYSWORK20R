@@ -1,7 +1,8 @@
-import {GET_LIST_USER_ACCOUNTS} from '../actions/types';
+import {CLEAR_ACCOUNTS_LIST, GET_LIST_USER_ACCOUNTS, GET_USERACCOUNT_INFO} from '../actions/types';
 
 const initialState = {
    accounts: [],
+   info: []
 }
 
 export default function (state = initialState, action){
@@ -12,6 +13,17 @@ export default function (state = initialState, action){
                 accounts: action.payload.accounts,
 
             }
+        case CLEAR_ACCOUNTS_LIST:
+            return {
+                ...state,
+                accounts: []
+            }
+        case GET_USERACCOUNT_INFO:
+            return {
+                ...state,
+                info: action.info
+            }
+
         default:
             return state;
     }

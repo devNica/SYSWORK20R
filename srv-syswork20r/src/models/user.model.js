@@ -82,4 +82,6 @@ User.uplodadImage = async (req, res)=>{
     res.status(200).json({flag: true, msg: 'The image has been successfully changed'});
 }
 
+
+
 module.exports = User;
