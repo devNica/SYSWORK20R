@@ -29,7 +29,7 @@ const EditEmployee = (props) =>{
             fn_clear_employee_record();
         }
 
-    },[user_fr, fn_get_employee_byID, fn_get_list_currencies, fn_get_jobs_list, fn_get_locations_list, match])
+    },[user_fr, fn_get_employee_byID, fn_get_list_currencies, fn_get_jobs_list, fn_get_locations_list, match, fn_clear_employee_record])
 
     const linkOptions = (
         <Fragment>

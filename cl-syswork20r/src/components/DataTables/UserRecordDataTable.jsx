@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {MDBDataTable} from 'mdbreact';
 import {connect} from 'react-redux';
 import {users_model} from '../../models/users'
+import {fn_get_useraccount_info} from '../../redux/actions/users'
 
 const mapStateToProps = state =>({
     users_fr: state.users.accounts,
@@ -30,23 +31,14 @@ const administrador_opciones = (data)=>{
 
 const UserRecordDataTable = (props) =>{
 
-    const {users_fr, fetchData} = props;
+    const {users_fr, fetchData, fn_get_useraccount_info} = props;
     const [data, setData] = useState(users_model([]).data);
 
     const handleOnClick = useCallback((e)=>{
         let field= e.currentTarget;
-        // //console.log(e.currentTarget.cells[1])
         let iduser=parseInt(field.cells[0].innerText)
-        let username=`${field.cells[1].innerText}`
-        let state=`${field.cells[3].innerText}`
-       
-        let user={
-            iduser, username, state
-        }
-
-        if(fetchData){
-            fetchData(user)
-        }
+        
+        fn_get_useraccount_info({filter: `iduser = ${iduser}`})
 
     },[])
 
@@ -82,4 +74,4 @@ const UserRecordDataTable = (props) =>{
     )
 }
 
-export default connect(mapStateToProps)(UserRecordDataTable);
+export default connect(mapStateToProps,{fn_get_useraccount_info})(UserRecordDataTable);

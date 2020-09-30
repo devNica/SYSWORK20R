@@ -17,13 +17,21 @@ export const users_model = (data) => {
                     sort: 'asc',
                     width: 150
                 },
+
                 {
-                    label: 'Password',
-                    field: 'password',
+                    label: 'Name',
+                    field: 'name',
                     sort: 'asc',
                     width: 150
                 },
-                
+
+                {
+                    label: 'Profile',
+                    field: 'profile',
+                    sort: 'asc',
+                    width: 150
+                },
+               
                 {
                     label: 'State',
                     field: 'state',

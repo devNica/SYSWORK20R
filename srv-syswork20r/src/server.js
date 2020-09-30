@@ -37,10 +37,12 @@ app.use(session({
 let userRouter = require('./routes/users.routes');
 let administrationRouter = require('./routes/administration.routes');
 let accountingRouter = require('./routes/accounting.routes');
+let useraccountsRouter = require('./routes/accounts.routes');
 
 //ENDPOINTS
 app.use('/api', userRouter);
 app.use('/api', administrationRouter);
 app.use('/api', accountingRouter);
+app.use('/api', useraccountsRouter);
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
