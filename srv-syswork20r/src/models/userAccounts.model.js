@@ -11,7 +11,7 @@ const userAccounts = (data)=>{
 
 userAccounts.findModuleByUserID = (req, res)=>{
     
-    cnc(mysql, config.db, query.account.info({filter: `USR.iduser = 1`}))
+    cnc(mysql, config.db, query.account.info(req.body.data))
     .then(result => { 
         let permissions = result.rows[0].permissions.split(',')
         let modules = result.rows[0].modules.split(',')

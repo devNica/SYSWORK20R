@@ -1,12 +1,13 @@
 import React,{Fragment, useState} from 'react';
+import './Card.css'
 
 const Card = (props) =>{
 
-    const {title, style, load, action} = props;
+    const {title, style, load} = props;
     
     const listLoad = load !==undefined ? load.map((el, i)=>(
         <li key={i}>
-            {el}
+            <span>{el} <button type="button" className="btn-link">delete</button></span>
         </li>
     )) : null
 
