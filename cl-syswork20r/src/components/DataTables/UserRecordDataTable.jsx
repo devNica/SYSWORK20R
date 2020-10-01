@@ -38,7 +38,7 @@ const UserRecordDataTable = (props) =>{
         let field= e.currentTarget;
         let iduser=parseInt(field.cells[0].innerText)
         
-        fn_get_useraccount_info({filter: `iduser = ${iduser}`})
+        fn_get_useraccount_info({filter: `USR.iduser = ${iduser}`})
 
     },[])
 

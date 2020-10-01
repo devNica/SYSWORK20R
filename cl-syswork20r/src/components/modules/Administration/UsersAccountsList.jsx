@@ -32,6 +32,27 @@ const UsersAccountsList = (props)=> {
 
     },[user_fr, fn_clear_account_list, fn_list_user_accounts])
 
+    const editOptions = (
+        <Fragment>
+            <div className="row mt-3">
+                <Card style={'bg-dark'}  title={'USER HAS PROFILES'} action={'listUserProdiles'} load={profile_fr}/>     
+                <Card style={'bg-danger'}  title={'USER HAS MODULES'} action={'listUserModules'} load={modules_fr}/>
+                <Card style={'bg-success'}  title={'PERMISSIONS'} action={'listUserPermissions'} load={permissions_fr}/>
+            </div>
+        </Fragment>
+    )
+
+    const message = (
+        <div className="py-3 my-3 border px-3">
+            <h1 className="text-center">Your account does not have permission to edit user accounts!</h1>
+        </div>
+    )
+
+    const permissionMessage = (
+        <div>
+            the user's account permissions were not found
+        </div>
+    )
 
     const linkOptions = (
         <Fragment>
@@ -54,13 +75,9 @@ const UsersAccountsList = (props)=> {
 
             <div id="content">
                 {permission === '' ? null : permission === 'view_users_accounts' ? <UserRecordDataTable/>: <Denied/>}
-                <Fragment>
-                   <div className="row mt-3">
-                       <Card style={'bg-danger'}  title={'USER HAS MODULES'} action={'listUserModules'} load={modules_fr}/>
-                       <Card style={'bg-dark'}  title={'USER HAS PROFILES'} action={'listUserProdiles'} load={profile_fr}/>
-                       <Card style={'bg-success'}  title={'PERMISSIONS'} action={'listUserPermissions'} load={permissions_fr}/>
-                   </div>
-                </Fragment>
+                {
+                    user_fr !== undefined ? user_fr.permissions.includes('edit_user_account') ? (editOptions)  : message : permissionMessage 
+                }
             </div>
             
         </Fragment>
