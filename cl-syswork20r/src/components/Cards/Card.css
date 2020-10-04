@@ -10,3 +10,16 @@ button:hover{
     text-decoration: underline;
     border: 0;
 } 
+
+
+.bg-blue {
+    background-color: rgb(51, 52, 117) !important;
+}
+
+.bg-red {
+    background-color: rgb(161, 44, 73) !important;
+}
+
+.bg-purple {
+    background-color: rgb(80, 52, 99) !important;
+}

@@ -4,6 +4,7 @@ import {MDBDataTable} from 'mdbreact';
 import {connect} from 'react-redux';
 import {users_model} from '../../models/users'
 import {fn_get_useraccount_info} from '../../redux/actions/users'
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const mapStateToProps = state =>({
     users_fr: state.users.accounts,
@@ -17,7 +18,7 @@ const administrador_opciones = (data)=>{
                 className="btn btn-sm btn-dark color-button-edit-user" 
                 //value={tasks.data.rows[i].idregin} 
                 to={`/administration/edituser/${data.iduser}`}
-                >Edit
+                > <VisibilityIcon  style={{ color: "#f6f7f5"}} fontSize="small"/>
             </Link>
             
         </div>

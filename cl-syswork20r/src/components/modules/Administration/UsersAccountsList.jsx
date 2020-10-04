@@ -35,22 +35,28 @@ const UsersAccountsList = (props)=> {
     const editOptions = (
         <Fragment>
             <div className="row mt-3">
-                <Card style={'bg-dark'}  title={'USER HAS PROFILES'} action={'listUserProdiles'} load={profile_fr}/>     
-                <Card style={'bg-danger'}  title={'USER HAS MODULES'} action={'listUserModules'} load={modules_fr}/>
-                <Card style={'bg-success'}  title={'PERMISSIONS'} action={'listUserPermissions'} load={permissions_fr}/>
+                <Card style={'bg-blue'}  title={'USER HAS PROFILES'} action={'listUserProdiles'} load={profile_fr}/>     
+                <Card style={'bg-red'}  title={'USER HAS MODULES'} action={'listUserModules'} load={modules_fr}/>
+                <Card style={'bg-purple'}  title={'PERMISSIONS'} action={'listUserPermissions'} load={permissions_fr}/>
             </div>
         </Fragment>
     )
 
     const message = (
         <div className="py-3 my-3 border px-3">
-            <h1 className="text-center">Your account does not have permission to edit user accounts!</h1>
+            <h1 className="text-center">Your profile does not have permission to edit user accounts!</h1>
         </div>
     )
 
     const permissionMessage = (
         <div>
             the user's account permissions were not found
+        </div>
+    )
+
+    const notice = (
+        <div className="py-3 my-3 mx-4 px-3">
+            <h4 className="text-center text-danger">your profile does not have the permissions to view user accounts!</h4>
         </div>
     )
 
@@ -76,7 +82,12 @@ const UsersAccountsList = (props)=> {
             <div id="content">
                 {permission === '' ? null : permission === 'view_users_accounts' ? <UserRecordDataTable/>: <Denied/>}
                 {
-                    user_fr !== undefined ? user_fr.permissions.includes('edit_user_account') ? (editOptions)  : message : permissionMessage 
+                    user_fr !== undefined ? 
+                        user_fr.permissions.includes('view_users_accounts') ? 
+                            user_fr.permissions.includes('edit_user_account') ? 
+                            (editOptions)  : message 
+                        : notice 
+                        : permissionMessage
                 }
             </div>
             
