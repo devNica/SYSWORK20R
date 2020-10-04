@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AdminPanel from '../../Panel/AdminPanel';
 import Denied from '../../user/Dashboard/Denied';
-import {fn_get_person_by_idperson} from '../../../redux/actions/administration'
+import {fn_clean_person_data, fn_get_person_by_idperson} from '../../../redux/actions/administration'
 import PersonEditForm from '../../Forms/PersonEditForm';
 import {fn_list_degrees} from '../../../redux/actions/administration'
-
-
 
 const mapStateToProps = state => ({
     user_fr: state.auth.user,
@@ -16,15 +14,16 @@ const mapStateToProps = state => ({
 const EditPerson = (props) =>{
     
     const [permission, setPermission] = useState('')
-    const {user_fr, fn_get_person_by_idperson, fn_list_degrees, match} = props
+    const {user_fr, fn_get_person_by_idperson, fn_list_degrees, match, fn_clean_person_data} = props
 
     useEffect(()=>{
         let permission = user_fr.permissions.find(element => element === 'edit_person_record')
         setPermission(permission)
         fn_list_degrees()
         fn_get_person_by_idperson(match.params)
+        fn_clean_person_data()
 
-    },[user_fr, fn_get_person_by_idperson, fn_list_degrees, match])
+    },[user_fr, fn_get_person_by_idperson, fn_list_degrees, match, fn_clean_person_data])
 
     const linkOptions = (
         <Fragment>
@@ -60,4 +59,4 @@ const EditPerson = (props) =>{
 }
 
 
-export default connect(mapStateToProps,{fn_get_person_by_idperson, fn_list_degrees})(EditPerson);
+export default connect(mapStateToProps,{fn_get_person_by_idperson, fn_list_degrees, fn_clean_person_data})(EditPerson);

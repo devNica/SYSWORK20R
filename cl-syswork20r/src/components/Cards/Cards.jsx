@@ -7,7 +7,7 @@ const Card = (props) =>{
     
     const listLoad = load !==undefined ? load.map((el, i)=>(
         <li key={i}>
-            <span>{el} <button type="button" className="btn-link">delete</button></span>
+            <span>{el} <button type="button" className="btn-link">access</button></span>
         </li>
     )) : null
 

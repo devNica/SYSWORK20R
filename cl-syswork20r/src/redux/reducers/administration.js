@@ -7,7 +7,8 @@ GET_EMPLOYEE_NUMBER,
 CLEAR_PERSONS_RECORDS, 
 GET_EMPLOYEES_RECORDS,
 GET_EMPLOYEE_BY_IDEMPLOYEE,
-CLEAR_EMPLOYEE_RECORD} from '../actions/types';
+CLEAR_EMPLOYEE_RECORD,
+CLEAN_PERSON_DATA} from '../actions/types';
 
 const initialState = {
    degrees: [],
@@ -73,6 +74,12 @@ export default function (state = initialState, action){
             return {
                 ...state,
                 employees: action.payload
+            }
+
+        case CLEAN_PERSON_DATA:
+            return {
+                ...state,
+                person_found: null
             }
 
         default:

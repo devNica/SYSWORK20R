@@ -21,7 +21,7 @@ const PersonEditForm = (props) =>{
     const [staff, setStaff] = useState(false);
     const [degreeSelected, setDegree] = useState(0);
     const [permission, setPermission] = useState('')
-    const {degrees_fr, person_fr, fn_edit_person_record, history, user_fr} = props;
+    const {degrees_fr, person_fr, fn_edit_person_record, history, user_fr, fn_clean_person_data} = props;
 
 
     useEffect(()=>{
@@ -35,7 +35,7 @@ const PersonEditForm = (props) =>{
         setDegree(degree)
         setStatus(status)
         setPermission(permission)
-        
+ 
     },[person_fr, user_fr])
 
     const onValueChange=(e) =>{

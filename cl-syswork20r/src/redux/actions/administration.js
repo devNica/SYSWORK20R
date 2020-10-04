@@ -7,7 +7,8 @@ GET_EMPLOYEE_NUMBER,
 CLEAR_PERSONS_RECORDS,
 GET_EMPLOYEES_RECORDS,
 GET_EMPLOYEE_BY_IDEMPLOYEE,
-CLEAR_EMPLOYEE_RECORD} from './types';
+CLEAR_EMPLOYEE_RECORD,
+CLEAN_PERSON_DATA} from './types';
 import api from '../../api/api'
 import {models} from '../../models/index';
 
@@ -50,6 +51,7 @@ export const fn_get_person_by_idperson = idperson => dispatch =>{
     })
     .catch(error=>console.log(error))
 }
+
 
 export const fn_create_person_record = data => dispatch =>{
     api.administration.create_person(data)
@@ -160,5 +162,11 @@ export const  fn_clear_persons_records = () => dispatch =>{
 export const fn_clear_employee_record = () => dispatch =>{
     dispatch({
         type: CLEAR_EMPLOYEE_RECORD
+    })
+}
+
+export const fn_clean_person_data = () => dispatch =>{
+    dispatch({
+        type: CLEAN_PERSON_DATA,
     })
 }
